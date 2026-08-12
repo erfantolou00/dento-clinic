@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useInView } from "@/hooks/use-in-view";
 
 type StatCounterProps = {
   value: number;
@@ -16,34 +17,24 @@ export function StatCounter({
   label,
   className,
 }: StatCounterProps) {
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.5 });
   const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true;
-          let start = 0;
-          const duration = 2000;
+    if (!inView) return;
 
-          const step = (timestamp: number) => {
-            if (!start) start = timestamp;
-            const progress = Math.min((timestamp - start) / duration, 1);
-            setCount(Math.floor(progress * value));
-            if (progress < 1) requestAnimationFrame(step);
-          };
+    let start = 0;
+    const duration = 2000;
 
-          requestAnimationFrame(step);
-        }
-      },
-      { threshold: 0.5 }
-    );
+    const step = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      setCount(Math.floor(progress * value));
+      if (progress < 1) requestAnimationFrame(step);
+    };
 
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [value]);
+    requestAnimationFrame(step);
+  }, [inView, value]);
 
   return (
     <div ref={ref} className={cn("space-y-2", className)}>

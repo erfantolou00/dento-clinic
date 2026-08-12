@@ -1,0 +1,16 @@
+"use client";
+
+import { useState } from "react";
+import { ArrowUpRight, CalendarDays, CheckCircle2 } from "lucide-react";
+import { Section } from "@/components/ui/section";
+import { SectionHeader } from "@/components/ui/section-header";
+import { FadeIn } from "@/components/motion/fade-in";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { services } from "@/lib/constants";
+
+export function Appointment() {
+  const [submitted, setSubmitted] = useState(false);
+  return <Section id="appointment" spacing="lg" surface="muted"><div className="grid gap-12 lg:grid-cols-[.82fr_1.18fr] lg:gap-20"><FadeIn><div className="lg:sticky lg:top-28"><SectionHeader label="Your next step" title="Let’s make room for your smile." description="Tell us a little about what you need. Our patient care team will get back to you within one business day." /><div className="mt-8 flex items-center gap-3 text-sm text-muted-foreground"><span className="flex size-10 items-center justify-center rounded-full bg-secondary text-foreground"><CalendarDays className="size-4" /></span> Mon–Fri, 8:00–18:00 · Sat, 9:00–14:00</div></div></FadeIn><FadeIn delay={.1}><form onSubmit={(event) => { event.preventDefault(); setSubmitted(true); }} className="rounded-3xl border border-border/70 bg-card p-6 shadow-sm md:p-10">{submitted ? <div className="flex min-h-[360px] flex-col items-center justify-center text-center"><CheckCircle2 className="size-12 text-primary" /><h3 className="mt-5 font-heading text-2xl font-semibold">We’ll be in touch soon.</h3><p className="mt-3 max-w-sm text-muted-foreground">Thanks for reaching out. We’ve received your request and will contact you to confirm a time.</p><button type="button" onClick={() => setSubmitted(false)} className="mt-7 text-sm font-medium text-primary underline underline-offset-4">Send another request</button></div> : <div className="grid gap-5 sm:grid-cols-2"><label className="space-y-2 text-sm font-medium">Your name<Input required placeholder="Jane Smith" /></label><label className="space-y-2 text-sm font-medium">Email address<Input required type="email" placeholder="jane@email.com" /></label><label className="space-y-2 text-sm font-medium">Phone number<Input required type="tel" placeholder="+1 555 000 0000" /></label><label className="space-y-2 text-sm font-medium">Preferred service<select required defaultValue="" className="flex h-11 w-full rounded-xl border border-input bg-background px-3 text-sm outline-none focus:border-primary"><option value="" disabled>Select a service</option>{services.map(service => <option key={service.id}>{service.title}</option>)}</select></label><label className="space-y-2 text-sm font-medium">Preferred date<Input required type="date" /></label><label className="space-y-2 text-sm font-medium sm:col-span-2">Anything we should know?<Textarea placeholder="A little context helps us prepare..." /></label><Button type="submit" size="lg" className="h-12 rounded-full px-6 sm:col-span-2">Request an appointment <ArrowUpRight className="size-4" /></Button><p className="text-xs leading-relaxed text-muted-foreground sm:col-span-2">By submitting, you agree to be contacted about your appointment request. No obligation.</p></div>}</form></FadeIn></div></Section>;
+}
