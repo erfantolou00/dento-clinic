@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { cn } from "@/lib/utils";
-import { siteConfig } from "@/lib/constants";
+import { siteConfig } from "@/content/site";
+import { SmoothScrollProvider } from "@/components/motion/smooth-scroll-provider";
 
 export const metadata: Metadata = {
   title: {
@@ -13,11 +13,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={cn("h-full antialiased font-sans")}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
-    </html>
+    <html lang="en">
+    <body>
+      <SmoothScrollProvider>
+        {children}
+      </SmoothScrollProvider>
+    </body>
+  </html>
   );
 }

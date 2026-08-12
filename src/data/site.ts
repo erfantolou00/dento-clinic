@@ -50,41 +50,42 @@ export const services: Service[] = [
     description:
       "Natural-looking dental fillings that restore function and confidence.",
     price: 155, eyebrow: "Restorative", duration: "45–60 min", featured: true,
+    image: "/images/servises/DentalFillings.avif",
   },
   {
     id: "invisalign",
     title: "Invisalign / Braces",
     description:
       "Restore your smile's natural brilliance with advanced whitening treatments.",
-    price: 88, eyebrow: "Orthodontics", duration: "45 min",
+    price: 88, eyebrow: "Orthodontics", duration: "45 min", image: "/images/servises/Invisalign.avif",
   },
   {
     id: "whitening",
     title: "Teeth Whitening",
     description:
       "Restore your smile's natural brilliance with advanced whitening treatments.",
-    price: 48, eyebrow: "Cosmetic", duration: "60 min",
+    price: 48, eyebrow: "Cosmetic", duration: "60 min", image: "/images/servises/TeethWhitening.avif",
   },
   {
     id: "cleaning",
     title: "Teeth cleaning",
     description:
       "Restore your smile's natural brilliance with advanced whitening treatments.",
-    price: 55, eyebrow: "Preventive", duration: "30 min",
+    price: 55, eyebrow: "Preventive", duration: "30 min", image: "/images/servises/Teethcleaning.avif",
   },
   {
     id: "root-canal",
     title: "Root Canal Therapy",
     description:
       "Advanced root canal therapy to relieve pain and preserve your natural tooth.",
-    price: 90, eyebrow: "Restorative", duration: "90 min",
+    price: 90, eyebrow: "Restorative", duration: "90 min", image: "/images/servises/RootCanalTherapy.avif",
   },
   {
     id: "implants",
     title: "Dental Implants",
     description:
       "Restore your smile's natural brilliance with advanced whitening treatments.",
-    price: 95, eyebrow: "Implantology", duration: "60 min",
+    price: 95, eyebrow: "Implantology", duration: "60 min", image: "/images/servises/DentalImplants.avif",
   },
 ];
 
@@ -110,10 +111,10 @@ export const processSteps: ProcessStep[] = [
 ];
 
 export const teamMembers: TeamMember[] = [
-  { id: "esther", name: "Esther Howard", role: "General Dentistry", initials: "EH", accent: "bg-[#dcebe3]" },
-  { id: "jenny", name: "Jenny Wilson", role: "Cosmetic Dentistry", initials: "JW", accent: "bg-[#e9e0d2]" },
-  { id: "jacob", name: "Jacob Jones", role: "Periodontics", initials: "JJ", accent: "bg-[#dce5ee]" },
-  { id: "courtney", name: "Courtney Henry", role: "Oral & Implant Surgeon", initials: "CH", accent: "bg-[#e9dfe2]" },
+  { id: "esther", name: "Esther Howard", role: "General Dentistry", initials: "EH", accent: "bg-[#dcebe3]", image: "/images/team/Howard.avif" },
+  { id: "jenny", name: "Jenny Wilson", role: "Cosmetic Dentistry", initials: "JW", accent: "bg-[#e9e0d2]", image: "/images/team/Wilson.avif" },
+  { id: "jacob", name: "Jacob Jones", role: "Periodontics", initials: "JJ", accent: "bg-[#dce5ee]", image: "/images/team/Jones.avif" },
+  { id: "courtney", name: "Courtney Henry", role: "Oral & Implant Surgeon", initials: "CH", accent: "bg-[#e9dfe2]", image: "/images/team/Henry.avif" },
 ];
 
 export const features: Feature[] = [

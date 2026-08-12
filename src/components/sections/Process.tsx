@@ -2,7 +2,7 @@ import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { ProcessStepCard } from "@/components/ui/process-step";
 import { FadeIn } from "@/components/motion/fade-in";
-import { processSteps } from "@/lib/constants";
+import { processSteps } from "@/content/site";
 
 export function Process() {
   return (

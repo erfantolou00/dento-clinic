@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
-import { footerLinks, socialLinks } from "@/lib/constants";
+import { footerLinks, socialLinks } from "@/content/site";
 
 export function Footer() {
   return (

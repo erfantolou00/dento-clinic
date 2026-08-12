@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
 import { PillButton } from "@/components/ui/pill-button";
-import { navLinks } from "@/lib/constants";
+import { navLinks } from "@/content/site";
 import { useScroll } from "@/hooks/use-scroll";
 import { cn } from "@/lib/utils";
 
@@ -35,7 +35,7 @@ export function Header({ variant = "dark" }: HeaderProps) {
         <div className="flex h-16 items-center justify-between md:h-20">
           <Logo variant={onHero ? "light" : "dark"} />
 
-          <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
+          <nav aria-label="Primary navigation" className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -59,6 +59,8 @@ export function Header({ variant = "dark" }: HeaderProps) {
           <button
             type="button"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
             className={cn(
               "inline-flex size-10 items-center justify-center rounded-lg md:hidden",
               onHero ? "text-white" : "text-foreground"
@@ -71,6 +73,8 @@ export function Header({ variant = "dark" }: HeaderProps) {
       </Container>
 
       <div
+        id="mobile-navigation"
+        aria-label="Mobile navigation"
         className={cn(
           "overflow-hidden border-t border-border/60 bg-background transition-all duration-300 md:hidden",
           mobileOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"

@@ -1,52 +1,14 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { TeamMember } from "@/types";
 
-const avatarColors = [
-  "from-blue-100 to-blue-200 text-blue-700",
-  "from-violet-100 to-violet-200 text-violet-700",
-  "from-emerald-100 to-emerald-200 text-emerald-700",
-  "from-amber-100 to-amber-200 text-amber-700",
-];
+type TeamCardProps = { member: TeamMember; index?: number; className?: string };
 
-type TeamCardProps = {
-  member: TeamMember;
-  index?: number;
-  className?: string;
-};
-
-export function TeamCard({ member, index = 0, className }: TeamCardProps) {
-  const initials = member.name
-    .split(" ")
-    .map((part) => part[0])
-    .join("");
-
-  return (
-    <article
-      className={cn(
-        "group space-y-4 transition-transform duration-300 hover:-translate-y-1",
-        className
-      )}
-    >
-      <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-muted">
-        <div
-          className={cn(
-            "flex h-full items-end bg-gradient-to-br p-6",
-            avatarColors[index % avatarColors.length]
-          )}
-        >
-          <Avatar className="size-16 rounded-xl border-2 border-white/50">
-            <AvatarFallback className="rounded-xl bg-white/80 text-lg font-semibold">
-              {initials}
-            </AvatarFallback>
-          </Avatar>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="font-heading text-lg font-semibold">{member.name}</h3>
-        <p className="text-sm text-muted-foreground">{member.role}</p>
-      </div>
-    </article>
-  );
+export function TeamCard({ member, className }: TeamCardProps) {
+  const initials = member.initials ?? member.name.split(" ").map((part) => part[0]).join("");
+  return <article className={cn("group", className)}><div className={cn("relative aspect-[.84/1] overflow-hidden rounded-[1.5rem]", member.accent ?? "bg-muted")}>
+    {member.image ? <Image src={member.image} alt={`${member.name}, ${member.role}`} fill sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 260px" className="object-cover grayscale-[.1] transition duration-700 group-hover:scale-105 group-hover:grayscale-0" /> : <div className="flex h-full items-end p-6"><span className="flex size-16 items-center justify-center rounded-2xl bg-white/70 font-heading text-xl font-semibold">{initials}</span></div>}
+    <div className="absolute inset-x-4 bottom-4 flex items-center justify-between rounded-2xl border border-white/20 bg-black/25 p-3 text-white backdrop-blur-md"><div><p className="font-medium">{member.name}</p><p className="mt-0.5 text-xs text-white/65">{member.role}</p></div><span className="flex size-9 items-center justify-center rounded-full bg-white text-foreground transition-transform group-hover:rotate-45"><ArrowUpRight className="size-4" /></span></div>
+  </div></article>;
 }

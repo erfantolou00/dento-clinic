@@ -1,3 +1,4 @@
+/** @deprecated Import content from `@/content/site` in feature code. */
 export {
   siteConfig,
   navLinks,
@@ -12,4 +13,4 @@ export {
   faqItems,
   footerLinks,
   socialLinks,
-} from "@/data/site";
+} from "@/content/site";

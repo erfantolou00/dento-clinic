@@ -15,10 +15,8 @@ export const staggerContainer = {
   },
 };
 
-export const defaultTransition = {
-  duration: 0.5,
-  ease: [0.22, 1, 0.36, 1] as const,
-};
+export { motionTokens as defaultMotionTokens, motionViewport, revealTransition, revealVariants } from "@/lib/motion/tokens";
+export const defaultTransition = { duration: 0.48, ease: [0.22, 1, 0.36, 1] as const };
 
 export const viewport = { once: true, amount: 0.18 } as const;
 

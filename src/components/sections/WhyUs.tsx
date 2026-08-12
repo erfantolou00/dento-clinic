@@ -3,7 +3,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { FeatureCard } from "@/components/ui/feature-card";
 import { PillButton } from "@/components/ui/pill-button";
 import { FadeIn } from "@/components/motion/fade-in";
-import { features, pricingHighlight } from "@/lib/constants";
+import { features, pricingHighlight } from "@/content/site";
 
 export function WhyUs() {
   return (
@@ -17,7 +17,7 @@ export function WhyUs() {
           />
         </FadeIn>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
             <FadeIn key={feature.title} delay={index * 0.1}>
               <FeatureCard feature={feature} />

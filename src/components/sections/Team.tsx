@@ -2,7 +2,7 @@ import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { TeamCard } from "@/components/ui/team-card";
 import { FadeIn } from "@/components/motion/fade-in";
-import { teamMembers } from "@/lib/constants";
+import { teamMembers } from "@/content/site";
 
 export function Team() {
   return (

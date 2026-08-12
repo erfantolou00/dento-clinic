@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { siteConfig } from "@/lib/constants";
+import { siteConfig } from "@/content/site";
 
 type LogoProps = {
   className?: string;

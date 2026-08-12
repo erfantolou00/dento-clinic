@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { ServiceTag } from "@/components/ui/service-tag";
 import { TeamLeadCard } from "@/components/ui/team-lead-card";
-import { heroTags, siteConfig } from "@/lib/constants";
+import { heroTags, siteConfig } from "@/content/site";
 import { defaultTransition, fadeUp, staggerContainer } from "@/lib/animations";
 import { ArrowUpRight, Check } from "lucide-react";
 import { PillButton } from "@/components/ui/pill-button";
@@ -14,17 +14,17 @@ export function Hero() {
   return (
     <section className="hero-gradient relative min-h-screen overflow-hidden text-white">
       <Image
-        src="/images/hero-bg.webp"
+        src="/images/heroBG.avif"
         alt=""
         fill
         priority
-        className="object-cover opacity-15 mix-blend-overlay"
+        className="object-cover opacity-40 mix-blend-overlay"
         sizes="100vw"
       />
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/20" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-black/20" />
 
-      <Container className="relative flex min-h-[760px] flex-col justify-end pb-10 pt-28 md:min-h-screen md:pb-16 md:pt-36">
+      <Container className="relative flex min-h-190 flex-col justify-end pb-10 pt-28 md:min-h-screen md:pb-16 md:pt-36">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
