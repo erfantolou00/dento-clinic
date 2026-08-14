@@ -1,27 +1,57 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import type { ProcessStep } from "@/types";
+import { defaultTransition } from "@/lib/animations";
 
 type ProcessStepCardProps = {
   step: ProcessStep;
+  index: number;
   className?: string;
 };
 
-export function ProcessStepCard({ step, className }: ProcessStepCardProps) {
+export function ProcessStepCard({ step, index, className }: ProcessStepCardProps) {
   return (
-    <article
+    <motion.article
+      variants={{
+        hidden: { opacity: 0, y: 28 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      transition={defaultTransition}
+      whileHover={{ y: -6 }}
       className={cn(
-        "group relative space-y-5 overflow-hidden rounded-[1.5rem] border border-border/60 bg-card p-6 transition-all duration-500 hover:-translate-y-1 hover:border-primary/20 hover:shadow-[0_20px_45px_rgb(20_43_53/0.09)] md:p-8",
+        "group relative flex h-full flex-col overflow-hidden rounded-[1.5rem]",
+        "border border-border/60 bg-card p-6 md:p-8",
+        "shadow-[0_8px_30px_rgb(20_43_53/0.04)]",
+        "transition-[border-color,box-shadow] duration-500",
+        "hover:border-primary/25 hover:shadow-[0_22px_50px_rgb(20_43_53/0.10)]",
         className
       )}
     >
-      <div className="flex items-center justify-between"><p className="eyebrow text-primary">Step {step.step}</p><span className="size-2 rounded-full bg-[#bce8d6] transition-transform duration-300 group-hover:scale-[2]" /></div>
-      <h3 className="font-heading text-xl font-semibold md:text-2xl">
+      {/* شماره بزرگ به سبک Framer */}
+      <div className="mb-6 flex items-center justify-between">
+        <span className="font-heading text-[2.75rem] font-bold leading-none tracking-tight text-primary/15 transition-colors duration-500 group-hover:text-primary/30 md:text-[3.25rem]">
+          [{step.step}]
+        </span>
+        <span className="size-2.5 rounded-full bg-[#bce8d6] transition-transform duration-500 group-hover:scale-[1.8]" />
+      </div>
+
+      <h3 className="font-heading text-xl font-semibold tracking-tight md:text-2xl">
         {step.title}
       </h3>
-      <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
+
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground md:text-base">
         {step.description}
       </p>
-      <div className="h-px w-14 bg-primary/30 transition-all duration-500 group-hover:w-full" />
-    </article>
+
+      {/* خط accent که روی hover باز می‌شود */}
+      <div className="mt-7 h-px w-12 origin-left bg-primary/35 transition-all duration-500 group-hover:w-full group-hover:bg-primary/50" />
+
+      {/* شماره کوچک در گوشه برای موبایل/دسترسی */}
+      <span className="sr-only">
+        Step {index + 1} of 3
+      </span>
+    </motion.article>
   );
 }

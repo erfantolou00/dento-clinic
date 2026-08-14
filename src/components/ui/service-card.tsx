@@ -3,7 +3,7 @@ import { ArrowUpRight, Clock3 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Service } from "@/types";
 
-type ServiceCardProps = { service: Service; active?: boolean; className?: string };
+type ServiceCardProps = { service: Service; active?: boolean; className?: string; onClick?: () => void };
 
 export function ServiceCard({ service, active = false, className }: ServiceCardProps) {
   return <article className={cn("group relative flex h-full min-h-[430px] w-[min(82vw,370px)] shrink-0 snap-center flex-col overflow-hidden rounded-[1.5rem] border border-border/70 bg-card shadow-[0_8px_30px_rgb(20_43_53/0.04)] transition-[transform,box-shadow,border-color] duration-500 sm:w-[360px] lg:w-[380px]", active && "border-primary/30 shadow-[0_22px_55px_rgb(20_43_53/0.14)]", className)}>

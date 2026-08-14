@@ -16,9 +16,11 @@ export type Service = {
 };
 
 export type ProcessStep = {
-  step: string;
+  step: number;
   title: string;
   description: string;
+  detail?: string;
+  icon?: string;
 };
 
 export type TeamMember = {

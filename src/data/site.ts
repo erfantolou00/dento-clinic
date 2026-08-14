@@ -91,22 +91,32 @@ export const services: Service[] = [
 
 export const processSteps: ProcessStep[] = [
   {
-    step: "01",
-    title: "Schedule Your Visit",
-    description:
-      "Book your consultation and experience gentle, patient-focused dental care.",
+    step: 1,
+    title: "Examination",
+    description: "We start with a comprehensive oral health assessment and digital imaging.",
+    detail: "Includes X-rays, intraoral scans, and a personalized consultation.",
+    icon: "🦷",
   },
   {
-    step: "02",
-    title: "Meet Your Dentist",
-    description:
-      "Dedicated professionals creating confident smiles through expert dental care.",
+    step: 2,
+    title: "Treatment Planning",
+    description: "We design a customized care plan tailored to your unique needs.",
+    detail: "We discuss all options, timelines, and financial considerations.",
+    icon: "📋",
   },
   {
-    step: "03",
-    title: "Smile with Confidence",
-    description:
-      "Transform your smile with personalized dental care and confidence.",
+    step: 3,
+    title: "Expert Care",
+    description: "Our specialists provide gentle, precise treatment using the latest technology.",
+    detail: "We prioritize your comfort with sedation options and pain-free techniques.",
+    icon: "👨‍⚕️",
+  },
+  {
+    step: 4,
+    title: "Ongoing Support",
+    description: "We ensure lasting results with follow-up care and preventive guidance.",
+    detail: "Regular check-ups and at-home care tips for a lifetime of healthy smiles.",
+    icon: "❤️",
   },
 ];
 
