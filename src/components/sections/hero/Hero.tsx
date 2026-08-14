@@ -18,11 +18,10 @@ export function Hero() {
         alt=""
         fill
         priority
-        className="object-cover opacity-40 mix-blend-overlay"
+        className="object-cover opacity-90 mix-blend-overlay"
         sizes="100vw"
       />
 
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-black/20" />
 
       <Container className="relative flex min-h-190 flex-col justify-end pb-10 pt-28 md:min-h-screen md:pb-16 md:pt-36">
         <motion.div

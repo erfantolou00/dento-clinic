@@ -16,7 +16,7 @@ type HeaderProps = {
 
 export function Header({ variant = "dark" }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const scrolled = useScroll(32);
+  const scrolled = useScroll(160);
   const isLight = variant === "light";
   const onHero = isLight && !scrolled;
 

@@ -77,7 +77,7 @@
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --hero-gradient: linear-gradient(135deg, oklch(0.18 0.02 250) 0%, oklch(0.27 0.03 245) 55%, oklch(0.42 0.04 190) 100%);
+  --hero-gradient: linear-gradient(135deg, oklch(0.18 0.01 250) 0%, oklch(0.27 0.01 245) 55%, oklch(0.42 0.01 190) 100%);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
