@@ -1,4 +1,3 @@
-"use client";
 import { Header, Footer } from "@/components/sections/shared/index";
 import { Hero } from "@/components/sections/hero/Hero";
 import { About } from "@/components/sections/about/About";

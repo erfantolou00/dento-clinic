@@ -131,7 +131,7 @@
     background-image: radial-gradient(circle at 10% 0%, oklch(0.94 0.04 165 / 0.35), transparent 32rem);
   }
   html {
-    @apply font-sans scroll-smooth;
+    @apply font-sans;
   }
 }
 
