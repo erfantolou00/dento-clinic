@@ -71,49 +71,67 @@ export function Services() {
         <FadeIn delay={0.1} className="shrink-0">
           <a
             href="#appointment"
-            className="group inline-flex items-center gap-2 text-sm font-semibold text-primary"
+            className="group inline-flex items-center gap-3 text-sm font-semibold text-primary transition-all hover:text-primary/80"
+            aria-label="View all available dental treatments"
           >
             See all treatments
-            <span className="flex size-8 items-center justify-center rounded-full bg-secondary transition-transform group-hover:rotate-45">
+            <span className="flex size-9 items-center justify-center rounded-full bg-secondary text-primary transition-all group-hover:rotate-45 group-hover:scale-110">
               <MoveUpRight className="size-4" />
             </span>
           </a>
         </FadeIn>
       </div>
 
-      {/* Carousel — ساختار صحیح Embla */}
+      {/* Carousel */}
       <div
         className="mt-12 md:mt-16"
         onMouseEnter={() => setIsPlaying(false)}
         onMouseLeave={() => setIsPlaying(true)}
+        role="region"
+        aria-label="Dental services carousel. Autoplay pauses when hovering over carousel."
       >
         {/* Viewport */}
-        <div className="overflow-hidden" ref={emblaRef}>
+        <div 
+          className="overflow-hidden" 
+          ref={emblaRef}
+          aria-live="polite"
+          aria-atomic="false"
+          aria-label="Service cards"
+        >
           {/* Container */}
-          <div className="flex gap-4 md:gap-6">
+          <div className="flex gap-5 md:gap-7">
             {services.map((service, index) => {
               const isActive = index === selected;
               return (
-                // Slide — بدون transform
                 <div
                   key={service.id}
                   className="min-w-0 shrink-0"
-                  // عرض را به کارت بسپار (ServiceCard خودش width دارد)
+                  role="group"
+                  aria-label={`Service ${index + 1} of ${services.length}: ${service.title}`}
+                  aria-current={isActive ? "true" : "false"}
                 >
-                  {/* Inner wrapper — فقط اینجا scale/opacity */}
+                  {/* Inner wrapper for scale/opacity effects */}
                   <div
                     className={cn(
-                      "origin-center transition-[transform,opacity] duration-500 ease-out will-change-transform",
+                      "origin-center transition-all duration-500 ease-out will-change-transform",
                       isActive
                         ? "scale-100 opacity-100"
-                        : "scale-[0.94] opacity-55"
+                        : "scale-[0.95] opacity-60 hover:opacity-80 hover:scale-[0.98]"
                     )}
                   >
                     <ServiceCard
                       service={service}
                       active={isActive}
-                      className="cursor-pointer"
+                      className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-2"
                       onClick={() => setSelectedService(service)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setSelectedService(service);
+                        }
+                      }}
+                      tabIndex={0}
+                      aria-label={`View details for ${service.title}`}
                     />
                   </div>
                 </div>
@@ -124,45 +142,52 @@ export function Services() {
       </div>
 
       {/* Progress + Controls */}
-      <div className="mt-8 flex items-center justify-between gap-5">
-        <div className="h-px flex-1 overflow-hidden rounded-full bg-border">
-          <motion.div
-            className="h-full origin-left bg-primary"
-            initial={false}
-            animate={{
-              scaleX: (selected + 1) / services.length,
-            }}
-            transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
-            style={{ transformOrigin: "left" }}
-          />
+      <div className="mt-10 flex items-center justify-between gap-6">
+        {/* Enhanced Progress Bar */}
+        <div className="flex-1 space-y-2">
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-border/50">
+            <motion.div
+              className="h-full rounded-full bg-linear-to-r from-primary to-accent"
+              initial={false}
+              animate={{
+                width: `${((selected + 1) / services.length) * 100}%`,
+              }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            />
+          </div>
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>Progress</span>
+            <span>{Math.round(((selected + 1) / services.length) * 100)}%</span>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* Enhanced Controls */}
+        <div className="flex items-center gap-3">
           <motion.button
-            whileHover={{ scale: 1.06 }}
+            whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.92 }}
             type="button"
             onClick={scrollPrev}
             aria-label="Previous service"
-            className="flex size-11 items-center justify-center rounded-full border border-border bg-card transition hover:border-primary hover:bg-secondary"
+            className="flex size-12 items-center justify-center rounded-full border-2 border-border bg-card transition-all hover:border-primary hover:bg-secondary hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/30"
           >
-            <ArrowLeft className="size-4" />
+            <ArrowLeft className="size-5" />
           </motion.button>
 
-          <span className="min-w-14 select-none text-center font-mono text-xs text-muted-foreground">
-            {String(selected + 1).padStart(2, "0")} /{" "}
-            {String(services.length).padStart(2, "0")}
+          <span className="min-w-16 select-none text-center font-mono text-sm font-medium text-foreground">
+            {String(selected + 1).padStart(2, "0")}
+            <span className="text-muted-foreground"> / {String(services.length).padStart(2, "0")}</span>
           </span>
 
           <motion.button
-            whileHover={{ scale: 1.06 }}
+            whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.92 }}
             type="button"
             onClick={scrollNext}
             aria-label="Next service"
-            className="flex size-11 items-center justify-center rounded-full border border-border bg-card transition hover:border-primary hover:bg-secondary"
+            className="flex size-12 items-center justify-center rounded-full border-2 border-border bg-card transition-all hover:border-primary hover:bg-secondary hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/30"
           >
-            <ArrowRight className="size-4" />
+            <ArrowRight className="size-5" />
           </motion.button>
         </div>
       </div>
@@ -177,7 +202,10 @@ export function Services() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={() => setSelectedService(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-md"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
           >
             <motion.div
               key="modal"
@@ -191,39 +219,40 @@ export function Services() {
               <button
                 type="button"
                 onClick={() => setSelectedService(null)}
-                className="absolute right-4 top-4 rounded-full p-2 text-muted-foreground transition hover:bg-muted hover:text-foreground"
-                aria-label="Close"
+                className="absolute right-4 top-4 rounded-full p-2 text-muted-foreground transition-all hover:bg-muted hover:text-foreground hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary/30"
+                aria-label="Close service details modal"
+                autoFocus
               >
                 <X className="size-5" />
               </button>
 
-              <div className="space-y-5 pr-8">
+              <div className="space-y-6 pr-8">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
                     <p className="eyebrow text-muted-foreground">
                       {selectedService.eyebrow}
                     </p>
-                    <h2 className="mt-1 font-heading text-2xl font-bold tracking-tight sm:text-3xl">
+                    <h2 id="modal-title" className="mt-1 h2">
                       {selectedService.title}
                     </h2>
                   </div>
                   {selectedService.duration && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1.5 text-xs font-semibold">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1.5 caption font-semibold">
                       <Clock3 className="size-3.5" />
                       {selectedService.duration}
                     </span>
                   )}
                 </div>
 
-                <p className="text-base leading-relaxed text-muted-foreground">
+                <p className="body text-muted-foreground">
                   {selectedService.description}
                 </p>
 
-                <div className="flex items-baseline gap-2 border-t border-border pt-5">
+                <div className="flex items-baseline gap-2 border-t border-border pt-6">
                   <span className="font-heading text-3xl font-bold">
                     ${selectedService.price.toFixed(2)}
                   </span>
-                  <span className="text-sm text-muted-foreground">
+                  <span className="body-sm text-muted-foreground">
                     starting price
                   </span>
                 </div>
@@ -231,7 +260,8 @@ export function Services() {
                 <a
                   href="#appointment"
                   onClick={() => setSelectedService(null)}
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 hover:scale-105"
+                  aria-label={`Book ${selectedService.title} treatment`}
                 >
                   Book this treatment
                   <MoveUpRight className="size-4" />

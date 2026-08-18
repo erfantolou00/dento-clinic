@@ -33,7 +33,7 @@ export function TestimonialSlider({ items, className }: TestimonialSliderProps) 
   return (
     <div className={cn("relative", className)}>
       <div className="mb-8 flex items-center justify-between">
-        <p className="font-heading text-sm font-medium text-muted-foreground">
+        <p className="caption font-medium text-muted-foreground">
           {String(selectedIndex + 1).padStart(2, "0")} /{" "}
           {String(items.length).padStart(2, "0")}
         </p>
@@ -62,13 +62,13 @@ export function TestimonialSlider({ items, className }: TestimonialSliderProps) 
         <div className="flex">
           {items.map((item) => (
             <div key={item.id} className="min-w-0 flex-[0_0_100%] pr-4">
-              <blockquote className="space-y-6">
-                <p className="font-heading text-2xl font-medium leading-snug md:text-3xl lg:text-4xl lg:leading-tight">
+              <blockquote className="stack-spacing-lg">
+                <p className="h3 lg:text-4xl lg:leading-tight">
                   &ldquo;{item.quote}&rdquo;
                 </p>
                 <footer>
                   <p className="font-medium">{item.author}</p>
-                  <p className="text-sm text-muted-foreground">{item.role}</p>
+                  <p className="caption text-muted-foreground">{item.role}</p>
                 </footer>
               </blockquote>
             </div>

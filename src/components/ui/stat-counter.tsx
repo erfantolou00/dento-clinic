@@ -37,12 +37,12 @@ export function StatCounter({
   }, [inView, value]);
 
   return (
-    <div ref={ref} className={cn("space-y-2", className)}>
-      <p className="font-heading text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
+    <div ref={ref} className={cn("stack-spacing-sm", className)}>
+      <p className="display">
         {count}
         {suffix}
       </p>
-      <p className="max-w-[12rem] text-sm leading-snug text-muted-foreground md:text-base">
+      <p className="max-w-[12rem] caption md:body-sm">
         {label}
       </p>
     </div>

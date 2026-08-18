@@ -22,7 +22,7 @@ export function ProcessStepCard({ step, index, className }: ProcessStepCardProps
       whileHover={{ y: -6 }}
       className={cn(
         "group relative flex h-full flex-col overflow-hidden rounded-[1.5rem]",
-        "border border-border/60 bg-card p-6 md:p-8",
+        "border border-border/60 bg-card card-padding-default md:card-padding-lg",
         "shadow-[0_8px_30px_rgb(20_43_53/0.04)]",
         "transition-[border-color,box-shadow] duration-500",
         "hover:border-primary/25 hover:shadow-[0_22px_50px_rgb(20_43_53/0.10)]",
@@ -34,14 +34,14 @@ export function ProcessStepCard({ step, index, className }: ProcessStepCardProps
         <span className="font-heading text-[2.75rem] font-bold leading-none tracking-tight text-primary/15 transition-colors duration-500 group-hover:text-primary/30 md:text-[3.25rem]">
           [{step.step}]
         </span>
-        <span className="size-2.5 rounded-full bg-[#bce8d6] transition-transform duration-500 group-hover:scale-[1.8]" />
+        <span className="size-2.5 rounded-full bg-accent transition-transform duration-500 group-hover:scale-[1.8]" />
       </div>
 
-      <h3 className="font-heading text-xl font-semibold tracking-tight md:text-2xl">
+      <h3 className="h3">
         {step.title}
       </h3>
 
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground md:text-base">
+      <p className="mt-3 flex-1 body-sm text-muted-foreground">
         {step.description}
       </p>
 

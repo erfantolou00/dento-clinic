@@ -8,9 +8,35 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  
+   /* New surface colors */
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-dark: var(--surface-dark);
+  
+  /* Primary colors*/
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  /* Accent colors*/
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  
+  /* Text colors*/
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  
+  /* Border colors*/
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  
+  /* Typography*/
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-dm-sans);
+  
+  /* Existing shadcn colors*/
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -26,20 +52,17 @@
   --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
-  --color-border: var(--border);
   --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  
+  /* Border radius */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -53,22 +76,43 @@
   --font-sans: Arial, Helvetica, sans-serif;
   --font-dm-sans: Arial, Helvetica, sans-serif;
   --font-geist-mono: "SFMono-Regular", Consolas, monospace;
+  
+   /* Core colors */
   --background: oklch(0.985 0.012 95);
   --foreground: oklch(0.19 0.035 250);
+  
+  /* Surface colors */
+  --surface: oklch(1 0 0);
+  --surface-muted: oklch(0.98 0.008 95);
+  --surface-dark: oklch(0.18 0.01 250);
+  
+   /* Primary colors */
+  --primary: oklch(0.34 0.07 246);
+  --primary-foreground: oklch(1 0 0);
+  
+   /* Accent colors (replacing #bce8d6 and #142b35) */
+  --accent: oklch(0.85 0.10 165); 
+  --accent-foreground: oklch(0.18 0.03 245); 
+  
+   /* Text colors */
+  --text-primary: oklch(0.19 0.035 250);
+  --text-secondary: oklch(0.45 0.02 250);
+  --text-muted: oklch(0.556 0 0);
+  
+   /* Border colors */
+  --border: oklch(0.88 0.018 250);
+  --border-subtle: oklch(0.92 0.01 250);
+  
+   /* Existing shadcn colors */
   --card: oklch(0.995 0.008 95);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.34 0.07 246);
-  --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.91 0.045 170);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.95 0.015 95);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.75 0.13 165);
-  --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.88 0.018 250);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.75 0.13 165);
   --chart-1: oklch(0.87 0 0);
@@ -136,8 +180,47 @@
 }
 
 @layer utilities {
+  /* Typography tokens */
+  .display { @apply font-heading text-5xl font-bold leading-[0.92] tracking-[-0.055em] sm:text-6xl md:text-7xl lg:text-[6.25rem]; }
+  .h1 { @apply font-heading text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl; }
+  .h2 { @apply font-heading text-3xl font-bold leading-tight sm:text-4xl md:text-5xl; }
+  .h3 { @apply font-heading text-2xl font-semibold leading-tight sm:text-3xl md:text-4xl; }
+  
+  .body-lg { @apply text-lg leading-relaxed; }
+  .body { @apply text-base leading-relaxed; }
+  .body-sm { @apply text-sm leading-relaxed; }
+  .caption { @apply text-xs leading-normal; }
   .eyebrow { @apply text-[0.68rem] font-semibold uppercase tracking-[0.24em]; }
-  .display { @apply font-heading tracking-[-0.055em]; }
+  
+  /* Spacing tokens */
+  .container-default { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+  
+  /* Section spacing */
+  .section-spacing-none { @apply py-0; }
+  .section-spacing-default { @apply py-20 md:py-28; }
+  .section-spacing-lg { @apply py-24 md:py-32 lg:py-36; }
+  
+  /* Stack spacing  (vertical gaps) */
+  .stack-spacing-xs { @apply space-y-1; }
+  .stack-spacing-sm { @apply space-y-2; }
+  .stack-spacing-default { @apply space-y-4; }
+  .stack-spacing-lg { @apply space-y-6; }
+  .stack-spacing-xl { @apply space-y-8; }
+  
+  /* Grid gaps */
+  .grid-gap-xs { @apply gap-2; }
+  .grid-gap-sm { @apply gap-3; }
+  .grid-gap-default { @apply gap-4; }
+  .grid-gap-lg { @apply gap-6; }
+  .grid-gap-xl { @apply gap-8; }
+  .grid-gap-2xl { @apply gap-12; }
+  
+  /* Card padding */
+  .card-padding-sm { @apply p-4; }
+  .card-padding-default { @apply p-6; }
+  .card-padding-lg { @apply p-8; }
+  
+  /* Visual utilities */
   .soft-grid { background-image: linear-gradient(to right, oklch(0.2 0.03 250 / .05) 1px, transparent 1px), linear-gradient(to bottom, oklch(0.2 0.03 250 / .05) 1px, transparent 1px); background-size: 48px 48px; }
   .text-balance { text-wrap: balance; }
   .skip-link { @apply fixed left-4 top-4 z-70 -translate-y-24 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-transform focus:translate-y-0; }

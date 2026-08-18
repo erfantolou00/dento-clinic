@@ -21,7 +21,7 @@ export function TeamLeadCard({
   return (
     <div
       className={cn(
-        "glass-card flex items-center gap-4 rounded-2xl p-4",
+        "glass-card flex items-center grid-gap-default rounded-2xl card-padding-sm",
         className
       )}
     >
@@ -35,14 +35,14 @@ export function TeamLeadCard({
         </AvatarFallback>
       </Avatar>
 
-      <div className="min-w-0 space-y-2">
+      <div className="min-w-0 stack-spacing-sm">
         <div>
           <p className="truncate font-semibold text-white">{name}</p>
-          <p className="text-sm text-white/60">{role}</p>
+          <p className="caption text-white/60">{role}</p>
         </div>
         <Link
           href={href}
-          className="group inline-flex items-center gap-1.5 text-sm text-white/80 transition-colors hover:text-white"
+          className="group inline-flex items-center gap-1.5 caption text-white/80 transition-colors hover:text-white"
         >
           Let&apos;s Talk
           <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />

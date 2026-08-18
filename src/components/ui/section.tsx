@@ -8,9 +8,9 @@ type SectionProps = React.ComponentProps<"section"> & {
 };
 
 const spacingMap = {
-  none: "",
-  default: "py-20 md:py-28",
-  lg: "py-24 md:py-32 lg:py-36",
+  none: "section-spacing-none",
+  default: "section-spacing-default",
+  lg: "section-spacing-lg",
 };
 
 const surfaceMap = {
