@@ -14,18 +14,18 @@ export function Hero() {
   return (
     <section className="hero-gradient relative min-h-screen overflow-hidden text-white">
       {/* Background image with improved gradient overlay */}
-      <div className="absolute inset-0 bg-linear-to-br from-surface-dark/95 via-surface-dark/85 to-surface-dark/90 z-0" />
+      <div className="absolute inset-0 bg-linear-to-br from-surface-dark/95 via-surface-dark/40 to-surface-dark/20 z-10" />
       <Image
         src="/images/heroBG.avif"
         alt="Modern dental clinic interior with natural light and clean design"
         fill
         priority
-        className="object-cover object-center scale-105"
+        className="object-cover object-center scale-105 z-0"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-linear-to-t from-surface-dark via-surface-dark/70 to-transparent z-0" />
+      <div className="absolute inset-0 bg-linear-to-t from-surface-dark via-surface-dark/70 to-transparent z-10" />
 
-      <Container className="relative flex min-h-screen flex-col justify-center pb-16 pt-32 md:pb-20 md:pt-40 lg:pt-48 z-10">
+      <Container className="relative flex min-h-screen flex-col justify-center pb-16 pt-32 md:pb-20 md:pt-40 lg:pt-48 z-20">
         <motion.div
           variants={staggerContainer}
           initial="hidden"

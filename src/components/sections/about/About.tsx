@@ -13,8 +13,8 @@ export function About() {
       <div className="grid gap-14 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-20">
         {/* Image Card */}
         <FadeIn className="group relative min-h-105 overflow-hidden rounded-[1.5rem] bg-secondary">
-          <Image 
-            src="/images/heroBG.avif" 
+          <Image
+            src="/images/about/2.jpg" 
             alt="A calm, modern Dento clinic environment with natural light and comfortable seating" 
             fill 
             sizes="(max-width: 1024px) 100vw, 45vw" 
@@ -45,7 +45,7 @@ export function About() {
               titleClassName="h2"
             />
             <TextLink 
-              href="#about" 
+              href="/about" 
               className="text-primary hover:text-primary/80 font-medium"
             >
               More About us

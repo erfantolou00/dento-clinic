@@ -22,7 +22,7 @@ export function TextLink({ href, children, className, light }: TextLinkProps) {
       )}
     >
       {children}
-      <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
     </Link>
   );
 }

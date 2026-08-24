@@ -1,7 +1,8 @@
 "use client";
 
+import * as React from "react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ArrowUpRight, CalendarDays, CheckCircle2 } from "lucide-react";
@@ -11,6 +12,13 @@ import { FadeIn } from "@/components/motion/fade-in";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { services } from "@/content/site";
 import type { AppointmentFormValues } from "@/types";
 
@@ -30,6 +38,7 @@ export function Appointment() {
   const [submitted, setSubmitted] = useState(false);
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
@@ -98,14 +107,14 @@ export function Appointment() {
                 onSubmit={handleSubmit(onSubmit)}
                 className="grid gap-5 sm:grid-cols-2"
               >
-                <Field label="Your name" error={errorFor("name")}>
+                <Field id="name" label="Your name" error={errorFor("name")}>
                   <Input
                     {...register("name")}
                     aria-invalid={Boolean(errors.name)}
                     placeholder="Jane Smith"
                   />
                 </Field>
-                <Field label="Email address" error={errorFor("email")}>
+                <Field id="email" label="Email address" error={errorFor("email")}>
                   <Input
                     {...register("email")}
                     aria-invalid={Boolean(errors.email)}
@@ -113,7 +122,7 @@ export function Appointment() {
                     placeholder="jane@email.com"
                   />
                 </Field>
-                <Field label="Phone number" error={errorFor("phone")}>
+                <Field id="phone" label="Phone number" error={errorFor("phone")}>
                   <Input
                     {...register("phone")}
                     aria-invalid={Boolean(errors.phone)}
@@ -121,23 +130,41 @@ export function Appointment() {
                     placeholder="+1 555 000 0000"
                   />
                 </Field>
-                <Field label="Preferred service" error={errorFor("service")}>
-                  <select
-                    {...register("service")}
-                    aria-invalid={Boolean(errors.service)}
-                    className="flex h-11 w-full rounded-xl border border-input bg-background px-3 text-sm outline-none transition focus:border-primary focus:ring-3 focus:ring-ring/30"
-                  >
-                    <option value="" disabled>
-                      Select a service
-                    </option>
-                    {services.map((service) => (
-                      <option key={service.id} value={service.id}>
-                        {service.title}
-                      </option>
-                    ))}
-                  </select>
+                <Field
+                  id="service"
+                  label="Preferred service"
+                  error={errorFor("service")}
+                >
+                  <Controller
+                    name="service"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        value={field.value}
+                        onValueChange={(value) => field.onChange(value ?? "")}
+                      >
+                        <SelectTrigger
+                          id={field.name}
+                          aria-invalid={Boolean(errors.service)}
+                          aria-describedby={
+                            errors.service ? "service-error" : undefined
+                          }
+                          className="h-9 w-full bg-transparent px-2.5 text-base md:text-sm"
+                        >
+                          <SelectValue placeholder="Select a service" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {services.map((service) => (
+                            <SelectItem key={service.id} value={service.id}>
+                              {service.title}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
                 </Field>
-                <Field label="Preferred date" error={errorFor("date")}>
+                <Field id="date" label="Preferred date" error={errorFor("date")}>
                   <Input
                     {...register("date")}
                     aria-invalid={Boolean(errors.date)}
@@ -145,6 +172,7 @@ export function Appointment() {
                   />
                 </Field>
                 <Field
+                  id="message"
                   label="Anything we should know?"
                   error={errorFor("message")}
                   className="sm:col-span-2"
@@ -178,28 +206,38 @@ export function Appointment() {
 }
 
 function Field({
+  id,
   label,
   error,
   className,
   children,
 }: {
+  id: string;
   label: string;
   error?: string;
   className?: string;
-  children: React.ReactNode;
+  children: React.ReactElement<{ id?: string; "aria-describedby"?: string }>;
 }) {
+  const errorId = `${id}-error`;
+
   return (
-    <label className={`space-y-2 text-sm font-medium ${className ?? ""}`}>
-      <span>{label}</span>
-      {children}
+    <div className={`space-y-2 text-sm font-medium ${className ?? ""}`}>
+      <label htmlFor={id} className="block">
+        {label}
+      </label>
+      {React.cloneElement(children, {
+        id,
+        "aria-describedby": error ? errorId : undefined,
+      })}
       {error && (
         <span
+          id={errorId}
           role="alert"
           className="block text-xs font-normal text-destructive"
         >
           {error}
         </span>
       )}
-    </label>
+    </div>
   );
 }

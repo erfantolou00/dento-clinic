@@ -2,12 +2,18 @@
 
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, MoveUpRight, X, Clock3 } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { ServiceCard } from "@/components/ui/service-card";
 import { FadeIn } from "@/components/motion/fade-in";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogClose,
+} from "@/components/ui/dialog";
 import { services } from "@/content/site";
 import type { Service } from "@/types";
 import { cn } from "@/lib/utils";
@@ -71,11 +77,11 @@ export function Services() {
         <FadeIn delay={0.1} className="shrink-0">
           <a
             href="#appointment"
-            className="group inline-flex items-center gap-3 text-sm font-semibold text-primary transition-all hover:text-primary/80"
+            className="group inline-flex items-center gap-3 text-sm font-semibold text-primary transition-colors hover:text-primary/80"
             aria-label="View all available dental treatments"
           >
             See all treatments
-            <span className="flex size-9 items-center justify-center rounded-full bg-secondary text-primary transition-all group-hover:rotate-45 group-hover:scale-110">
+            <span className="flex size-9 items-center justify-center rounded-full bg-secondary text-primary transition-transform group-hover:rotate-45 group-hover:scale-110">
               <MoveUpRight className="size-4" />
             </span>
           </a>
@@ -87,6 +93,15 @@ export function Services() {
         className="mt-12 md:mt-16"
         onMouseEnter={() => setIsPlaying(false)}
         onMouseLeave={() => setIsPlaying(true)}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            scrollPrev();
+          } else if (e.key === "ArrowRight") {
+            e.preventDefault();
+            scrollNext();
+          }
+        }}
         role="region"
         aria-label="Dental services carousel. Autoplay pauses when hovering over carousel."
       >
@@ -94,6 +109,9 @@ export function Services() {
         <div 
           className="overflow-hidden" 
           ref={emblaRef}
+          tabIndex={0}
+          role="group"
+          aria-roledescription="carousel"
           aria-live="polite"
           aria-atomic="false"
           aria-label="Service cards"
@@ -113,7 +131,7 @@ export function Services() {
                   {/* Inner wrapper for scale/opacity effects */}
                   <div
                     className={cn(
-                      "origin-center transition-all duration-500 ease-out will-change-transform",
+                      "origin-center transition-[transform,opacity] duration-500 ease-out",
                       isActive
                         ? "scale-100 opacity-100"
                         : "scale-[0.95] opacity-60 hover:opacity-80 hover:scale-[0.98]"
@@ -169,7 +187,7 @@ export function Services() {
             type="button"
             onClick={scrollPrev}
             aria-label="Previous service"
-            className="flex size-12 items-center justify-center rounded-full border-2 border-border bg-card transition-all hover:border-primary hover:bg-secondary hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/30"
+            className="flex size-12 items-center justify-center rounded-full border-2 border-border bg-card transition-[border-color,background-color,box-shadow] hover:border-primary hover:bg-secondary hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/30"
           >
             <ArrowLeft className="size-5" />
           </motion.button>
@@ -185,7 +203,7 @@ export function Services() {
             type="button"
             onClick={scrollNext}
             aria-label="Next service"
-            className="flex size-12 items-center justify-center rounded-full border-2 border-border bg-card transition-all hover:border-primary hover:bg-secondary hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/30"
+            className="flex size-12 items-center justify-center rounded-full border-2 border-border bg-card transition-[border-color,background-color,box-shadow] hover:border-primary hover:bg-secondary hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/30"
           >
             <ArrowRight className="size-5" />
           </motion.button>
@@ -193,48 +211,28 @@ export function Services() {
       </div>
 
       {/* Modal */}
-      <AnimatePresence>
-        {selectedService && (
-          <motion.div
-            key="overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            onClick={() => setSelectedService(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-md"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
-          >
-            <motion.div
-              key="modal"
-              initial={{ opacity: 0, scale: 0.92, y: 24 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: 16 }}
-              transition={{ type: "spring", damping: 28, stiffness: 320 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-card p-6 shadow-2xl md:p-8"
-            >
-              <button
-                type="button"
-                onClick={() => setSelectedService(null)}
-                className="absolute right-4 top-4 rounded-full p-2 text-muted-foreground transition-all hover:bg-muted hover:text-foreground hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary/30"
-                aria-label="Close service details modal"
-                autoFocus
-              >
-                <X className="size-5" />
-              </button>
+      <Dialog
+        open={selectedService !== null}
+        onOpenChange={(open) => {
+          if (!open) setSelectedService(null);
+        }}
+      >
+        <DialogContent>
+          <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-card p-6 shadow-2xl md:p-8">
+            <DialogClose aria-label="Close service details">
+              <X className="size-5" />
+            </DialogClose>
 
+            {selectedService && (
               <div className="space-y-6 pr-8">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
                     <p className="eyebrow text-muted-foreground">
                       {selectedService.eyebrow}
                     </p>
-                    <h2 id="modal-title" className="mt-1 h2">
+                    <DialogTitle className="mt-1">
                       {selectedService.title}
-                    </h2>
+                    </DialogTitle>
                   </div>
                   {selectedService.duration && (
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1.5 caption font-semibold">
@@ -260,17 +258,17 @@ export function Services() {
                 <a
                   href="#appointment"
                   onClick={() => setSelectedService(null)}
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 hover:scale-105"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground transition-[opacity,transform] hover:opacity-90 hover:scale-105"
                   aria-label={`Book ${selectedService.title} treatment`}
                 >
                   Book this treatment
                   <MoveUpRight className="size-4" />
                 </a>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </Section>
   );
 }

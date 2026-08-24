@@ -18,7 +18,7 @@ export function Team() {
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
         {teamMembers.map((member, index) => (
           <FadeIn key={member.id} delay={index * 0.08}>
-            <TeamCard member={member} index={index} />
+            <TeamCard member={member}  />
           </FadeIn>
         ))}
       </div>

@@ -27,28 +27,57 @@ export function SectionHeader({
         className
       )}
     >
-      <p
+      {/* Label + Animated Dot */}
+      <div
         className={cn(
-          "mb-4 text-sm font-medium tracking-wide",
-          dark ? "text-white/70" : "text-muted-foreground"
+          "mb-5 flex items-center gap-2.5",
+          align === "center" && "justify-center"
         )}
       >
-        {label}
-      </p>
+        {/* Animated Dot */}
+        <span className="relative flex h-2.5 w-2.5">
+          <span
+            className={cn(
+              "absolute inline-flex h-full w-full animate-ping rounded-full opacity-60",
+              dark ? "bg-accent" : "bg-primary"
+            )}
+          />
+          <span
+            className={cn(
+              "relative inline-flex h-2.5 w-2.5 rounded-full",
+              dark ? "bg-accent" : "primary"
+            )}
+          />
+        </span>
+
+        <p
+          className={cn(
+            "text-sm font-medium tracking-wide",
+            dark ? "text-white/70" : "text-muted-foreground"
+          )}
+        >
+          {label}
+        </p>
+      </div>
+
+      {/* Title */}
       <h2
         className={cn(
-          "h2",
+          titleClassName,
+          "h2 text-balance",
           dark ? "text-white" : "text-foreground",
-          titleClassName
         )}
       >
         {title}
       </h2>
+
+      {/* Description */}
       {description && (
         <p
           className={cn(
-            "mt-5 body md:body-lg",
-            dark ? "text-white/70" : "text-muted-foreground"
+            "mt-5 max-w-2xl body md:body-lg text-balance",
+            dark ? "text-white/65" : "text-muted-foreground",
+            align === "center" && "mx-auto"
           )}
         >
           {description}

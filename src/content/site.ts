@@ -1,12 +1,8 @@
 import type {
-  FAQItem,
   Feature,
   NavLink,
   ProcessStep,
-  Service,
   Stat,
-  TeamMember,
-  Testimonial,
 } from "@/types";
 
 export const siteConfig = {
