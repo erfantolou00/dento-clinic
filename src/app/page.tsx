@@ -8,6 +8,7 @@ import { WhyUs } from "@/components/sections/why-us/WhyUs";
 import { Testimonials } from "@/components/sections/testimonials/Testimonials";
 import { FAQ } from "@/components/sections/faq/FAQ";
 import { Appointment } from "@/components/sections/appointment/Appointment";
+import { Analytics } from '@vercel/analytics/next';
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
         <Appointment />
       </main>
       <Footer />
+      <Analytics />
     </div>
   );
 }
