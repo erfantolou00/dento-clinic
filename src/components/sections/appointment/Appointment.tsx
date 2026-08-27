@@ -36,6 +36,8 @@ const appointmentSchema = z.object({
 
 export function Appointment() {
   const [submitted, setSubmitted] = useState(false);
+const [submitError, setSubmitError] = useState<string | null>(null);
+  
   const {
     register,
     control,
@@ -47,9 +49,35 @@ export function Appointment() {
     defaultValues: { service: "" },
   });
 
-  const onSubmit = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 450));
-    setSubmitted(true);
+  const onSubmit = async (values: AppointmentFormValues) => {
+    setSubmitError(null);
+  
+    try {
+      const response = await fetch("/api/appointments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+  
+      const result = await response.json();
+  
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message ?? "Unable to submit appointment request.",
+        );
+      }
+  
+      setSubmitted(true);
+      reset();
+    } catch (error) {
+      console.error("Appointment submission failed:", error);
+  
+      setSubmitError(
+        "We couldn't send your request. Please try again or contact the clinic directly.",
+      );
+    }
   };
 
   const errorFor = (name: keyof AppointmentFormValues) => errors[name]?.message;
@@ -183,6 +211,14 @@ export function Appointment() {
                     placeholder="A little context helps us prepare..."
                   />
                 </Field>
+                {submitError && (
+  <p
+    role="alert"
+    className="rounded-xl border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive sm:col-span-2"
+  >
+    {submitError}
+  </p>
+)}
                 <Button
                   type="submit"
                   size="lg"
