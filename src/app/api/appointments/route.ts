@@ -74,7 +74,8 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           success: false,
-          message: "Unable to send appointment notification.",
+          message: error.message,
+          name: error.name,
         },
         { status: 502 },
       );

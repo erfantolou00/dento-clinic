@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ClipboardList, HeartPulse, ScanSearch, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ProcessStep } from "@/types";
 import { defaultTransition } from "@/lib/animations";
@@ -11,46 +12,58 @@ type ProcessStepCardProps = {
   className?: string;
 };
 
+const stepIcons = {
+  scan: ScanSearch,
+  clipboard: ClipboardList,
+  sparkles: Sparkles,
+  heart: HeartPulse,
+};
+
 export function ProcessStepCard({ step, index, className }: ProcessStepCardProps) {
+  const Icon = stepIcons[step.icon as keyof typeof stepIcons] ?? Sparkles;
+
   return (
     <motion.article
       variants={{
-        hidden: { opacity: 0, y: 28 },
+        hidden: { opacity: 0, y: 24 },
         visible: { opacity: 1, y: 0 },
       }}
       transition={defaultTransition}
       whileHover={{ y: -6 }}
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-[1.5rem]",
-        "border border-border/60 bg-card card-padding-default md:card-padding-lg",
-        "shadow-[0_8px_30px_rgb(20_43_53/0.04)]",
-        "transition-[border-color,box-shadow] duration-500",
-        "hover:border-primary/25 hover:shadow-[0_22px_50px_rgb(20_43_53/0.10)]",
+        "group relative grid h-full gap-6 overflow-hidden rounded-[1.25rem]",
+        "border border-border/70 bg-card p-5 shadow-card sm:p-6",
+        "transition-[border-color,box-shadow,background-color] duration-500",
+        "hover:border-primary/35 hover:bg-surface hover:shadow-elevated",
         className
       )}
     >
-      {/* شماره بزرگ به سبک Framer */}
-      <div className="mb-6 flex items-center justify-between">
-        <span className="font-heading text-[2.75rem] font-bold leading-none tracking-tight text-primary/15 transition-colors duration-500 group-hover:text-primary/30 md:text-[3.25rem]">
-          [{step.step}]
+      <div className="flex items-start justify-between gap-4">
+        <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-soft transition-transform duration-500 group-hover:scale-105">
+          <Icon className="size-5" aria-hidden />
         </span>
-        <span className="size-2.5 rounded-full bg-accent transition-transform duration-500 group-hover:scale-[1.8]" />
+        <span className="font-heading text-5xl font-bold leading-none text-primary/12 transition-colors duration-500 group-hover:text-primary/22">
+          {String(step.step).padStart(2, "0")}
+        </span>
       </div>
 
-      <h3 className="h3">
-        {step.title}
-      </h3>
+      <div>
+        <p className="eyebrow text-primary/70">Step {step.step}</p>
+        <h3 className="mt-3 font-heading text-2xl font-semibold leading-tight text-foreground">
+          {step.title}
+        </h3>
+        <p className="mt-3 body-sm text-muted-foreground">{step.description}</p>
+      </div>
 
-      <p className="mt-3 flex-1 body-sm text-muted-foreground">
-        {step.description}
-      </p>
+      {step.detail && (
+        <p className="rounded-2xl border border-border/70 bg-secondary/45 p-4 text-sm leading-relaxed text-foreground/75">
+          {step.detail}
+        </p>
+      )}
 
-      {/* خط accent که روی hover باز می‌شود */}
-      <div className="mt-7 h-px w-12 origin-left bg-primary/35 transition-all duration-500 group-hover:w-full group-hover:bg-primary/50" />
-
-      {/* شماره کوچک در گوشه برای موبایل/دسترسی */}
+      <div className="h-px w-14 origin-left bg-primary/35 transition-all duration-500 group-hover:w-full group-hover:bg-primary" />
       <span className="sr-only">
-        Step {index + 1} of 3
+        Step {index + 1}
       </span>
     </motion.article>
   );

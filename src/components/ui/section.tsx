@@ -14,8 +14,8 @@ const spacingMap = {
 };
 
 const surfaceMap = {
-  default: "bg-background",
-  muted: "bg-muted/30",
+  default: "bg-background/90",
+  muted: "bg-muted/35",
   dark: "bg-foreground text-background",
 };
 
@@ -31,7 +31,12 @@ export function Section({
 
   return (
     <section
-      className={cn(spacingMap[spacing], surfaceMap[surface], className)}
+      className={cn(
+        "relative border-t border-border/55 first:border-t-0 section-pattern",
+        spacingMap[spacing],
+        surfaceMap[surface],
+        className
+      )}
       {...props}
     >
       {content}

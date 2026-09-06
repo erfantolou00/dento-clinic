@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { ServiceTag } from "@/components/ui/service-tag";
 import { TeamLeadCard } from "@/components/ui/team-lead-card";
@@ -11,6 +13,54 @@ import { Check } from "lucide-react";
 import { PillButton } from "@/components/ui/pill-button";
 
 export function Hero() {
+  const phrases = useMemo(
+    () => [
+      "beautifully cared for.",
+      "gently restored.",
+      "confident every day.",
+      "planned with precision.",
+    ],
+    []
+  );
+  const shouldReduceMotion = useReducedMotion();
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [visibleText, setVisibleText] = useState(phrases[0]);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      return;
+    }
+
+    const currentPhrase = phrases[phraseIndex];
+    const isComplete = !isDeleting && visibleText === currentPhrase;
+    const isCleared = isDeleting && visibleText === "";
+
+    const timeout = window.setTimeout(
+      () => {
+        if (isComplete) {
+          setIsDeleting(true);
+          return;
+        }
+
+        if (isCleared) {
+          setIsDeleting(false);
+          setPhraseIndex((index) => (index + 1) % phrases.length);
+          return;
+        }
+
+        setVisibleText((text) =>
+          isDeleting
+            ? currentPhrase.slice(0, Math.max(text.length - 1, 0))
+            : currentPhrase.slice(0, text.length + 1)
+        );
+      },
+      isComplete ? 1200 : isDeleting ? 34 : 72
+    );
+
+    return () => window.clearTimeout(timeout);
+  }, [isDeleting, phraseIndex, phrases, shouldReduceMotion, visibleText]);
+
   return (
     <section className="hero-gradient relative min-h-screen overflow-hidden text-white">
       {/* Background image with improved gradient overlay */}
@@ -36,27 +86,38 @@ export function Hero() {
             <p className="eyebrow mb-5 text-white/70">A calmer kind of dental care</p>
             <h1 className="display text-balance">
               Your best smile,
-              <br /><span className="text-accent">beautifully cared for.</span>
+              <br />
+              <span className="inline-grid min-h-[1.05em] text-accent">
+                <span className="inline-flex items-baseline">
+                  <span>{visibleText}</span>
+                  {!shouldReduceMotion && (
+                    <span
+                      aria-hidden
+                      className="ml-2 inline-block h-[0.82em] w-[3px] translate-y-[0.08em] animate-pulse rounded-full bg-accent"
+                    />
+                  )}
+                </span>
+              </span>
             </h1>
             <p className="max-w-xl body-lg text-white/80 leading-relaxed">
               Thoughtful dentistry for real life — combining clinical expertise, modern technology, and a softer experience.
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <PillButton 
-                href="#appointment" 
+                href="/#appointment" 
                 className="bg-accent text-accent-foreground hover:bg-white hover:scale-105 transition-transform duration-300 py-3 pl-8 pr-2 text-base"
               >
                 Book your visit
               </PillButton>
-              <a 
-                href="#services" 
+              <Link
+                href="/#services" 
                 className="group inline-flex items-center gap-3 px-4 py-3 text-sm font-medium text-white/80 transition-all hover:text-white hover:bg-white/10 rounded-full"
               >
                 <span className="inline-flex size-8 items-center justify-center rounded-full border border-white/30 group-hover:border-white/50 group-hover:bg-white/10 transition-all">
                   <Check className="size-4" />
                 </span>
                 Explore treatments
-              </a>
+              </Link>
             </div>
           </motion.div>
 

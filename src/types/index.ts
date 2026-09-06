@@ -13,6 +13,10 @@ export type Service = {
   eyebrow?: string;
   duration?: string;
   featured?: boolean;
+  summary?: string;
+  benefits?: string[];
+  treatmentSteps?: string[];
+  idealFor?: string[];
 };
 
 export type ProcessStep = {

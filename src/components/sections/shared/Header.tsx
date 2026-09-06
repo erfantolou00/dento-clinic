@@ -53,7 +53,7 @@ export function Header({ variant = "dark" }: HeaderProps) {
           </nav>
 
           <div className="hidden md:block">
-            <PillButton href="#appointment">Book a session</PillButton>
+            <PillButton href="/#appointment">Book a session</PillButton>
           </div>
 
           <button
@@ -91,7 +91,7 @@ export function Header({ variant = "dark" }: HeaderProps) {
               {link.label}
             </Link>
           ))}
-          <PillButton href="#appointment" className="w-fit">
+          <PillButton href="/#appointment" className="w-fit">
             Book a session
           </PillButton>
         </Container>

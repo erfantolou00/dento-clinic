@@ -1,21 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import useEmblaCarousel from "embla-carousel-react";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, MoveUpRight, X, Clock3 } from "lucide-react";
+import { ArrowLeft, ArrowRight, MoveUpRight } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { ServiceCard } from "@/components/ui/service-card";
 import { FadeIn } from "@/components/motion/fade-in";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogClose,
-} from "@/components/ui/dialog";
 import { services } from "@/content/site";
-import type { Service } from "@/types";
 import { cn } from "@/lib/utils";
 
 export function Services() {
@@ -29,7 +23,6 @@ export function Services() {
 
   const [selected, setSelected] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [selectedService, setSelectedService] = useState<Service | null>(null);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -75,8 +68,8 @@ export function Services() {
           />
         </FadeIn>
         <FadeIn delay={0.1} className="shrink-0">
-          <a
-            href="#appointment"
+          <Link
+            href="/services"
             className="group inline-flex items-center gap-3 text-sm font-semibold text-primary transition-colors hover:text-primary/80"
             aria-label="View all available dental treatments"
           >
@@ -84,7 +77,7 @@ export function Services() {
             <span className="flex size-9 items-center justify-center rounded-full bg-secondary text-primary transition-transform group-hover:rotate-45 group-hover:scale-110">
               <MoveUpRight className="size-4" />
             </span>
-          </a>
+          </Link>
         </FadeIn>
       </div>
 
@@ -140,16 +133,7 @@ export function Services() {
                     <ServiceCard
                       service={service}
                       active={isActive}
-                      className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-2"
-                      onClick={() => setSelectedService(service)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setSelectedService(service);
-                        }
-                      }}
-                      tabIndex={0}
-                      aria-label={`View details for ${service.title}`}
+                      href={`/services/${service.id}`}
                     />
                   </div>
                 </div>
@@ -209,66 +193,6 @@ export function Services() {
           </motion.button>
         </div>
       </div>
-
-      {/* Modal */}
-      <Dialog
-        open={selectedService !== null}
-        onOpenChange={(open) => {
-          if (!open) setSelectedService(null);
-        }}
-      >
-        <DialogContent>
-          <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-card p-6 shadow-2xl md:p-8">
-            <DialogClose aria-label="Close service details">
-              <X className="size-5" />
-            </DialogClose>
-
-            {selectedService && (
-              <div className="space-y-6 pr-8">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div>
-                    <p className="eyebrow text-muted-foreground">
-                      {selectedService.eyebrow}
-                    </p>
-                    <DialogTitle className="mt-1">
-                      {selectedService.title}
-                    </DialogTitle>
-                  </div>
-                  {selectedService.duration && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1.5 caption font-semibold">
-                      <Clock3 className="size-3.5" />
-                      {selectedService.duration}
-                    </span>
-                  )}
-                </div>
-
-                <p className="body text-muted-foreground">
-                  {selectedService.description}
-                </p>
-
-                <div className="flex items-baseline gap-2 border-t border-border pt-6">
-                  <span className="font-heading text-3xl font-bold">
-                    ${selectedService.price.toFixed(2)}
-                  </span>
-                  <span className="body-sm text-muted-foreground">
-                    starting price
-                  </span>
-                </div>
-
-                <a
-                  href="#appointment"
-                  onClick={() => setSelectedService(null)}
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground transition-[opacity,transform] hover:opacity-90 hover:scale-105"
-                  aria-label={`Book ${selectedService.title} treatment`}
-                >
-                  Book this treatment
-                  <MoveUpRight className="size-4" />
-                </a>
-              </div>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
     </Section>
   );
 }

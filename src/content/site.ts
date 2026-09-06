@@ -18,11 +18,11 @@ export const siteConfig = {
 } as const;
 
 export const navLinks: NavLink[] = [
-  { label: "About us", href: "#about" },
-  { label: "Service", href: "#services" },
-  { label: "Team", href: "#team" },
-  { label: "Our approach", href: "#process" },
-  { label: "FAQ", href: "#faq" },
+  { label: "About us", href: "/#about" },
+  { label: "Service", href: "/#services" },
+  { label: "Team", href: "/#team" },
+  { label: "Our approach", href: "/#process" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 export const heroTags = [
@@ -45,28 +45,28 @@ export const processSteps: ProcessStep[] = [
     title: "Examination",
     description: "We start with a comprehensive oral health assessment and digital imaging.",
     detail: "Includes X-rays, intraoral scans, and a personalized consultation.",
-    icon: "🦷",
+    icon: "scan",
   },
   {
     step: 2,
     title: "Treatment Planning",
     description: "We design a customized care plan tailored to your unique needs.",
     detail: "We discuss all options, timelines, and financial considerations.",
-    icon: "📋",
+    icon: "clipboard",
   },
   {
     step: 3,
     title: "Expert Care",
     description: "Our specialists provide gentle, precise treatment using the latest technology.",
     detail: "We prioritize your comfort with sedation options and pain-free techniques.",
-    icon: "👨‍⚕️",
+    icon: "sparkles",
   },
   {
     step: 4,
     title: "Ongoing Support",
     description: "We ensure lasting results with follow-up care and preventive guidance.",
     detail: "Regular check-ups and at-home care tips for a lifetime of healthy smiles.",
-    icon: "❤️",
+    icon: "heart",
   },
 ];
 
@@ -94,11 +94,11 @@ export const pricingHighlight = {
 };
 
 export const footerLinks: NavLink[] = [
-  { label: "About us", href: "#about" },
-  { label: "Service", href: "#services" },
-  { label: "Our approach", href: "#process" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Appointment", href: "#appointment" },
+  { label: "About us", href: "/#about" },
+  { label: "Service", href: "/#services" },
+  { label: "Our approach", href: "/#process" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Appointment", href: "/#appointment" },
 ];
 
 export const socialLinks: NavLink[] = [

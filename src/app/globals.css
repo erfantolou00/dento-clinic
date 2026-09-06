@@ -90,15 +90,15 @@
      CORE COLORS
      ========================================================= */
 
-  --background: oklch(0.985 0.012 95);
-  --foreground: oklch(0.19 0.035 250);
+  --background: oklch(0.985 0.014 235);
+  --foreground: oklch(0.18 0.04 252);
 
   /* =========================================================
      SURFACES
      ========================================================= */
 
   --surface: oklch(1 0 0);
-  --surface-muted: oklch(0.98 0.008 95);
+  --surface-muted: oklch(0.972 0.02 238);
   --surface-elevated: oklch(1 0 0);
   --surface-dark: oklch(0.18 0.01 250);
 
@@ -106,10 +106,10 @@
      BRAND
      ========================================================= */
 
-  --primary: oklch(0.34 0.07 246);
+  --primary: oklch(0.42 0.11 246);
   --primary-foreground: oklch(1 0 0);
 
-  --accent: oklch(0.85 0.10 165);
+  --accent: oklch(0.82 0.105 188);
   --accent-foreground: oklch(0.18 0.03 245);
 
   /* =========================================================
@@ -124,29 +124,29 @@
      BORDERS
      ========================================================= */
 
-  --border: oklch(0.88 0.018 250);
-  --border-subtle: oklch(0.92 0.01 250);
+  --border: oklch(0.86 0.03 242);
+  --border-subtle: oklch(0.91 0.018 242);
 
   /* =========================================================
      COMPONENT COLORS / SHADCN
      ========================================================= */
 
-  --card: oklch(0.995 0.008 95);
+  --card: oklch(0.996 0.008 238);
   --card-foreground: oklch(0.145 0 0);
 
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
 
-  --secondary: oklch(0.91 0.045 170);
+  --secondary: oklch(0.92 0.045 226);
   --secondary-foreground: oklch(0.205 0 0);
 
-  --muted: oklch(0.95 0.015 95);
+  --muted: oklch(0.945 0.025 232);
   --muted-foreground: oklch(0.556 0 0);
 
   --destructive: oklch(0.577 0.245 27.325);
 
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.75 0.13 165);
+  --ring: oklch(0.70 0.13 246);
 
   /* =========================================================
      RADIUS
@@ -204,9 +204,9 @@
   --hero-gradient:
     linear-gradient(
       135deg,
-      oklch(0.18 0.01 250) 0%,
-      oklch(0.27 0.01 245) 55%,
-      oklch(0.42 0.01 190) 100%
+      oklch(0.16 0.045 252) 0%,
+      oklch(0.30 0.075 246) 55%,
+      oklch(0.48 0.08 202) 100%
     );
 
   /* =========================================================
@@ -290,11 +290,18 @@
 
   body {
     @apply bg-background text-foreground;
-    background-image: radial-gradient(
-      circle at 10% 0%,
-      oklch(0.94 0.04 165 / 0.35),
-      transparent 32rem
-    );
+    background-image:
+      radial-gradient(
+        circle at 10% 0%,
+        oklch(0.88 0.08 232 / 0.34),
+        transparent 32rem
+      ),
+      radial-gradient(
+        circle at 1px 1px,
+        oklch(0.42 0.11 246 / 0.10) 1px,
+        transparent 0
+      );
+    background-size: auto, 28px 28px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -386,11 +393,11 @@
   }
 
   .section-spacing-default {
-    @apply py-20 md:py-28;
+    @apply py-16 md:py-[5.5rem];
   }
 
   .section-spacing-lg {
-    @apply py-24 md:py-32 lg:py-36;
+    @apply py-[4.5rem] md:py-24 lg:py-28;
   }
 
   /* =========================================================
@@ -483,6 +490,16 @@
       );
 
     background-size: 48px 48px;
+  }
+
+  .section-pattern {
+    background-image:
+      radial-gradient(
+        circle at 1px 1px,
+        oklch(0.42 0.11 246 / 0.075) 1px,
+        transparent 0
+      );
+    background-size: 30px 30px;
   }
 
   .section-divider {
