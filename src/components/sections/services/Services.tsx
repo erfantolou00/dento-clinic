@@ -55,7 +55,7 @@ export function Services() {
     <Section
       id="services"
       spacing="lg"
-      surface="muted"
+      surface="mist"
       className="overflow-hidden"
     >
       {/* Header */}

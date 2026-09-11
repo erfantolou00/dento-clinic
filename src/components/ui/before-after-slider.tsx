@@ -34,7 +34,7 @@ export function BeforeAfterSlider({
     <div
       ref={frameRef}
       className={cn(
-        "relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-muted shadow-elevated select-none",
+        "relative aspect-4/3 overflow-hidden rounded-[1.5rem] bg-muted shadow-elevated select-none",
         className
       )}
     >

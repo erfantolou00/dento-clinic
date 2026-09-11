@@ -15,7 +15,7 @@ export const metadata = createMetadata({
 export default function ServicesPage() {
   return (
     <SiteFrame mainClassName="pt-28">
-      <section className="relative overflow-hidden pb-16 pt-10 md:pb-24 md:pt-16">
+      <section className="page-intro relative overflow-hidden pb-16 pt-10 md:pb-24 md:pt-16">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(ellipse_at_50%_0%,oklch(0.70_0.13_246/0.18),transparent_65%)]"

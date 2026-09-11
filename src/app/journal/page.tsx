@@ -14,7 +14,7 @@ export const metadata = createMetadata({
 export default function JournalPage() {
   return (
     <SiteFrame mainClassName="pt-28">
-      <section className="pb-20 pt-10 md:pb-28 md:pt-16">
+      <section className="page-intro pb-20 pt-10 md:pb-28 md:pt-16">
         <Container>
           <div className="max-w-3xl">
             <p className="eyebrow text-primary/70">Journal</p>
@@ -30,7 +30,7 @@ export default function JournalPage() {
                 href={`/journal/${post.slug}`}
                 className="group overflow-hidden rounded-[1.5rem] border border-border/70 bg-card shadow-card transition hover:-translate-y-1 hover:border-primary/20"
               >
-                <div className="relative aspect-[4/3]">
+                <div className="relative aspect-4/3">
                   <Image
                     src={post.image}
                     alt=""

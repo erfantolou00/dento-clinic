@@ -1,109 +1,59 @@
-```markdown
-# 🦷 Dento — Modern Dental Clinic Website
+# Dento — Dental clinic website
 
-> یک وب‌سایت لوکس، سریع و تبدیل‌محور برای کلینیک‌های دندانپزشکی  
-> ساخته‌شده با Next.js 15 + shadcn/ui + Framer Motion
-
-<br/>
-
-![Dento Preview](https://tranquil-choice-742625.framer.app/)
-
-<br/>
+A production-ready Next.js template for Canadian dental clinics. Built to book visits, explain treatment, and look premium on a phone and a desktop.
 
 ---
 
-## ✨ ویژگی‌ها
+## Features
 
-- طراحی تمیز، حرفه‌ای و کاملاً ریسپانسیو
-- انیمیشن‌های نرم و مدرن با Framer Motion
-- بخش‌های کامل لندینگ پیج کلینیک:
-  - Hero جذاب با CTA قوی
-  - About + آمار انیمیشنی
-  - Services با قیمت و کارت‌های زیبا
-  - Process (مراحل درمان)
-  - Team Members
-  - Why Choose Us
-  - Testimonials Slider
-  - FAQ Accordion
-  - فرم نوبت‌دهی حرفه‌ای
-- کامپوننت‌های آماده و قابل استفاده مجدد با **shadcn/ui**
-- بهینه‌سازی شده برای SEO و Performance
-- پشتیبانی کامل از Dark Mode (اختیاری)
+### Patient conversion
+- Sticky mobile dock with **Call**, **Text**, and **Book**
+- Appointment form with validation, preferred time, and service prefill (`/appointment?service=whitening`)
+- Email to the clinic plus a confirmation to the patient (Resend)
+- Calendar link for clinics that already use an online scheduler
+- Emergency page and after-hours phone number
+
+### Clinic operations
+- Toronto-ready clinic content: NAP, hours, parking, transit, accessibility
+- Direct billing copy for major Canadian insurers and **CDCP**
+- Clear CAD starting fees, not placeholder USD
+- Visit-prep checklists for new patients
+- Map embed and Google directions
+
+### Marketing pages
+- Full landing: Hero, About, Services carousel, before/after, process, why us, visit, insurance, team, testimonials, FAQ, emergency, appointment
+- Inner routes for About, Services, Team, Visit, Journal, FAQ, Process, Appointment, Emergency, Privacy
+- Service detail pages with benefits, visit flow, and treatment FAQs
+- Journal articles for SEO (first visit, insurance/CDCP, emergency toothache)
+
+### Design system
+- Light and dark themes with a circular view-transition toggle
+- Alternating section surfaces (mist, wash, cream) so the light theme is not a white sheet
+- Shared UI: pill buttons, cards, accordion, form controls, before/after slider
+- Motion with reduced-motion support and Lenis smooth scroll
+
+### Technical
+- Next.js App Router, TypeScript, Tailwind, shadcn/ui
+- Content-driven architecture (`src/content/`) — no CMS required
+- SEO: Open Graph, canonical URLs, `sitemap.xml`, `robots.txt`
+- JSON-LD for `Dentist` and `FAQPage`
+- PIPEDA-oriented privacy page
 
 ---
 
-## 🛠 تکنولوژی‌ها
-
-| تکنولوژی              | کاربرد                          |
-|-----------------------|---------------------------------|
-| **Next.js 15**        | فریم‌ورک اصلی (App Router)     |
-| **TypeScript**        | تایپ‌سیفتی                      |
-| **Tailwind CSS**      | استایل‌دهی                      |
-| **shadcn/ui**         | کامپوننت‌های UI (Base UI + Vega)|
-| **Framer Motion**     | انیمیشن‌ها                      |
-| **Lucide React**      | آیکون‌ها                        |
-| **React Hook Form**   | مدیریت فرم                      |
-| **Zod**               | اعتبارسنجی فرم                  |
-| **Embla Carousel**    | اسلایدر نظرات                   |
-
----
-
-## 🚀 راه‌اندازی سریع
+## Quick start
 
 ```bash
-# کلون کردن پروژه
-git clone https://github.com/your-username/dento-clinic.git
-cd dento-clinic
-
-# نصب پکیج‌ها
 npm install
-
-# اجرای پروژه
+cp .env.example .env.local
 npm run dev
 ```
 
-حالا برو به:
-
-👉 [http://localhost:3000](http://localhost:3000)
-
----
-
-## 📁 ساختار پروژه
-
-```bash
-src/
-├── app/
-│   ├── layout.tsx
-│   ├── page.tsx
-│   └── globals.css
-│
-├── components/
-│   ├── ui/                     # کامپوننت‌های shadcn
-│   ├── sections/
-│   │   ├── Hero.tsx
-│   │   ├── About.tsx
-│   │   ├── Services.tsx
-│   │   ├── Process.tsx
-│   │   ├── Team.tsx
-│   │   ├── WhyUs.tsx
-│   │   ├── Testimonials.tsx
-│   │   ├── FAQ.tsx
-│   │   └── Appointment.tsx
-│   ├── Header.tsx
-│   └── Footer.tsx
-│
-├── lib/
-│   └── utils.ts
-│
-└── types/
-    └── index.ts
-```
+Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
 ## Customize for a clinic
-
-Most buyers only need the content files and environment variables:
 
 | File | What to change |
 |---|---|
@@ -111,64 +61,49 @@ Most buyers only need the content files and environment variables:
 | `src/content/site.ts` | Clinic name, navigation, stats |
 | `src/content/services.ts` | Treatments and CAD starting fees |
 | `src/content/team.ts` | Clinicians |
-| `src/content/faq.ts` | Questions patients actually ask |
+| `src/content/faq.ts` | Patient questions |
 | `src/content/blog.ts` | Journal articles |
-| `src/app/globals.css` | Colour tokens |
-| `.env.example` | Copy to `.env.local` for Resend appointment mail |
+| `src/app/globals.css` | Colour tokens and section surfaces |
+| `.env.example` | Copy to `.env.local` for Resend |
 
-Copy `.env.example` to `.env.local` and set:
+Environment variables:
 
-- `RESEND_API_KEY`
-- `APPOINTMENT_NOTIFICATION_EMAIL`
-- `APPOINTMENT_FROM_EMAIL`
-
----
-
-## 📦 اسکریپت‌ها
-
-| دستور               | توضیح                              |
-|---------------------|------------------------------------|
-| `npm run dev`       | اجرای محیط توسعه                  |
-| `npm run build`     | ساخت نسخه نهایی                   |
-| `npm run start`     | اجرای نسخه Production             |
-| `npm run lint`      | بررسی کیفیت کد                    |
-
----
-
-## 🌐 دیپلوی
-
-بهترین و سریع‌ترین روش:
-
-1. پروژه را روی GitHub پوش کنید
-2. به [Vercel](https://vercel.com) بروید
-3. پروژه را Import کنید
-4. Deploy بزنید
-
-در کمتر از ۱ دقیقه سایت شما آنلاین می‌شود.
-
----
-
-## 📸 پیش‌نمایش
-
-> الهام‌گرفته از قالب اصلی:  
-> [https://tranquil-choice-742625.framer.app](https://tranquil-choice-742625.framer.app)
-
----
-
-## 🤝 مشارکت
-
-اگر ایده‌ای داری یا باگی پیدا کردی:
-
-1. پروژه را Fork کن
-2. یک Branch جدید بساز
-3. تغییراتت را Commit کن
-4. Pull Request بفرست
-
----
-
-<div align="center">
-
-**ساخته‌شده با ❤️ برای کلینیک‌های دندانپزشکی مدرن**
-
-</div>
+```bash
+RESEND_API_KEY=
+APPOINTMENT_NOTIFICATION_EMAIL=
+APPOINTMENT_FROM_EMAIL=
 ```
+
+---
+
+## Project structure
+
+```text
+src/
+├── app/                 # Routes, metadata, appointment API
+├── components/
+│   ├── ui/              # Design-system primitives
+│   ├── motion/          # Animation primitives
+│   └── sections/        # Page sections
+├── content/             # All clinic copy and data
+├── hooks/
+├── lib/                 # SEO, formatters, mail, tokens
+└── types/
+```
+
+---
+
+## Scripts
+
+| Command | Purpose |
+|---|---|
+| `npm run dev` | Local development |
+| `npm run build` | Production build |
+| `npm run start` | Serve the production build |
+| `npm run lint` | Lint |
+
+---
+
+## Deploy
+
+Push to GitHub, import the repo in [Vercel](https://vercel.com), add the Resend environment variables, and deploy.

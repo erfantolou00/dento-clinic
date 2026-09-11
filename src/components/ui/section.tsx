@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/container";
 type SectionProps = React.ComponentProps<"section"> & {
   container?: boolean;
   spacing?: "default" | "lg" | "none";
-  surface?: "default" | "muted" | "dark";
+  surface?: "default" | "muted" | "mist" | "wash" | "cream" | "dark";
 };
 
 const spacingMap = {
@@ -14,9 +14,12 @@ const spacingMap = {
 };
 
 const surfaceMap = {
-  default: "bg-background/90",
-  muted: "bg-muted/35",
-  dark: "bg-foreground text-background",
+  default: "surface-canvas",
+  muted: "surface-muted",
+  mist: "surface-mist",
+  wash: "surface-wash",
+  cream: "surface-cream",
+  dark: "bg-surface-dark text-background",
 };
 
 export function Section({
@@ -32,7 +35,7 @@ export function Section({
   return (
     <section
       className={cn(
-        "relative border-t border-border/55 first:border-t-0 section-pattern",
+        "relative border-t border-border/40 first:border-t-0",
         spacingMap[spacing],
         surfaceMap[surface],
         className

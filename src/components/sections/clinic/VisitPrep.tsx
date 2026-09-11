@@ -5,7 +5,7 @@ import { visitPrep } from "@/content/clinic";
 
 export function VisitPrep() {
   return (
-    <Section id="prepare" spacing="lg" surface="muted">
+    <Section id="prepare" spacing="lg" surface="cream">
       <FadeIn>
         <SectionHeader
           label="Prepare"

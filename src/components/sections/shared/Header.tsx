@@ -28,7 +28,7 @@ export function Header({ variant = "dark" }: HeaderProps) {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled
-          ? "border-b border-border/50 bg-background/85 shadow-sm backdrop-blur-xl"
+          ? "border-b border-border/50 bg-surface-cream/80 shadow-sm backdrop-blur-xl"
           : onHero
             ? "bg-transparent"
             : "bg-background/95 backdrop-blur-md"

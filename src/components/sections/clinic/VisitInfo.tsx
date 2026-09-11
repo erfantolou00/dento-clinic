@@ -12,7 +12,7 @@ import { toTelHref } from "@/lib/format";
 
 export function VisitInfo({ showMap = true }: { showMap?: boolean }) {
   return (
-    <Section id="visit" spacing="lg">
+    <Section id="visit" spacing="lg" surface="mist">
       <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <FadeIn className="space-y-8">
           <SectionHeader

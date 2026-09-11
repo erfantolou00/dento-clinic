@@ -6,7 +6,7 @@ import { teamMembers } from "@/content/site";
 
 export function Team() {
   return (
-    <Section id="team" spacing="lg" surface="muted">
+    <Section id="team" spacing="lg" surface="cream">
       <FadeIn className="mb-12 md:mb-16">
         <SectionHeader
           label="Team"

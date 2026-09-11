@@ -10,7 +10,7 @@ import {
 
 export function Insurance() {
   return (
-    <Section id="insurance" spacing="lg" surface="muted">
+    <Section id="insurance" spacing="lg" surface="wash">
       <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <FadeIn>
           <SectionHeader

@@ -41,7 +41,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   return (
     <SiteFrame mainClassName="pt-28">
-        <section className="relative overflow-hidden pb-16 pt-8 md:pb-24 md:pt-14">
+        <section className="page-intro relative overflow-hidden pb-16 pt-8 md:pb-24 md:pt-14">
           <div
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 h-96 bg-[radial-gradient(ellipse_at_45%_0%,oklch(0.70_0.13_246/0.20),transparent_68%)]"
@@ -84,7 +84,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 </Link>
               </div>
 
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-muted shadow-elevated">
+              <div className="relative aspect-4/3 overflow-hidden rounded-[1.5rem] bg-muted shadow-elevated">
                 {service.image && (
                   <Image
                     src={service.image}
@@ -95,13 +95,13 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     className="object-cover"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/35 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-primary/35 via-transparent to-transparent" />
               </div>
             </div>
           </Container>
         </section>
 
-        <section className="bg-surface-muted py-16 md:py-24">
+        <section className="surface-mist py-16 md:py-24">
           <Container>
             <div className="grid gap-6 lg:grid-cols-3">
               <DetailPanel title="Benefits" items={service.benefits ?? []} />

@@ -7,7 +7,7 @@ import { toTelHref } from "@/lib/format";
 
 export function EmergencyCare() {
   return (
-    <Section id="emergency" spacing="lg">
+    <Section id="emergency" spacing="lg" surface="wash">
       <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <FadeIn className="space-y-6">
           <SectionHeader

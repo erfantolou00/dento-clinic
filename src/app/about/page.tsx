@@ -15,7 +15,7 @@ export const metadata = createMetadata({
 export default function AboutPage() {
   return (
     <SiteFrame mainClassName="pt-28">
-      <section className="relative overflow-hidden pb-10 pt-10 md:pt-16">
+      <section className="page-intro relative overflow-hidden pb-10 pt-10 md:pt-16">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
             <div>
@@ -27,7 +27,7 @@ export default function AboutPage() {
                 Dento brings precise diagnostics, gentle communication, and thoughtful treatment planning into one King West clinic.
               </p>
             </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-muted shadow-elevated">
+            <div className="relative aspect-4/3 overflow-hidden rounded-[1.5rem] bg-muted shadow-elevated">
               <Image
                 src="/images/about/1_1.avif"
                 alt="Dento clinical space and dental care environment"

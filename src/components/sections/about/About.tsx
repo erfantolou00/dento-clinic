@@ -9,7 +9,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export function About() {
   return (
-    <Section id="about" spacing="lg">
+    <Section id="about" spacing="lg" surface="cream">
       <div className="grid gap-14 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-20">
         {/* Image Card */}
         <FadeIn className="group relative min-h-105 overflow-hidden rounded-[1.5rem] bg-secondary">

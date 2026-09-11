@@ -21,7 +21,7 @@ export function ServiceCard({
   return <Link
     href={href}
     className={cn(
-      "group relative block h-full min-h-[430px] w-[min(82vw,370px)] shrink-0 snap-center overflow-hidden rounded-[1.5rem] border border-border/70 bg-card shadow-[0_8px_30px_rgb(20_43_53/0.04)] transition-[transform,box-shadow,border-color] duration-500 focus-visible:ring-3 focus-visible:ring-ring/35 sm:w-[360px] lg:w-[380px]", 
+      "group relative block h-full min-h-107.5 w-[min(82vw,370px)] shrink-0 snap-center overflow-hidden rounded-[1.5rem] border border-border/70 bg-card shadow-[0_8px_30px_rgb(20_43_53/0.04)] transition-[transform,box-shadow,border-color] duration-500 focus-visible:ring-3 focus-visible:ring-ring/35 sm:w-90 lg:w-95", 
       active && "border-primary/30 shadow-[0_22px_55px_rgb(20_43_53/0.14)]", 
       className
     )}
@@ -38,9 +38,9 @@ export function ServiceCard({
             className="object-cover transition duration-700 group-hover:scale-105"
           />
         ) : (
-          <div className="h-full bg-gradient-to-br from-secondary to-muted" />
+          <div className="h-full bg-linear-to-br from-secondary to-muted" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-primary/70 via-primary/10 to-transparent" />
         <span className="absolute left-5 top-5 rounded-full border border-white/20 bg-primary/35 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.18em] text-white backdrop-blur-md">
           {service.eyebrow}
         </span>

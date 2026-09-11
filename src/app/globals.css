@@ -17,6 +17,9 @@
   --color-surface-muted: var(--surface-muted);
   --color-surface-elevated: var(--surface-elevated);
   --color-surface-dark: var(--surface-dark);
+  --color-surface-mist: var(--surface-mist);
+  --color-surface-wash: var(--surface-wash);
+  --color-surface-cream: var(--surface-cream);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
@@ -90,17 +93,20 @@
      CORE COLORS
      ========================================================= */
 
-  --background: oklch(0.985 0.014 235);
+  --background: oklch(0.965 0.018 232);
   --foreground: oklch(0.18 0.04 252);
 
   /* =========================================================
      SURFACES
      ========================================================= */
 
-  --surface: oklch(1 0 0);
-  --surface-muted: oklch(0.972 0.02 238);
-  --surface-elevated: oklch(1 0 0);
+  --surface: oklch(0.99 0.01 95);
+  --surface-muted: oklch(0.945 0.028 236);
+  --surface-elevated: oklch(0.992 0.012 95);
   --surface-dark: oklch(0.18 0.01 250);
+  --surface-mist: oklch(0.948 0.032 240);
+  --surface-wash: oklch(0.955 0.034 178);
+  --surface-cream: oklch(0.972 0.022 88);
 
   /* =========================================================
      BRAND
@@ -131,17 +137,17 @@
      COMPONENT COLORS / SHADCN
      ========================================================= */
 
-  --card: oklch(0.996 0.008 238);
+  --card: oklch(0.994 0.012 95);
   --card-foreground: oklch(0.145 0 0);
 
-  --popover: oklch(1 0 0);
+  --popover: oklch(0.995 0.01 95);
   --popover-foreground: oklch(0.145 0 0);
 
-  --secondary: oklch(0.92 0.045 226);
+  --secondary: oklch(0.91 0.05 220);
   --secondary-foreground: oklch(0.205 0 0);
 
-  --muted: oklch(0.945 0.025 232);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted: oklch(0.94 0.03 228);
+  --muted-foreground: oklch(0.45 0.03 250);
 
   --destructive: oklch(0.577 0.245 27.325);
 
@@ -209,6 +215,21 @@
       oklch(0.48 0.08 202) 100%
     );
 
+  --page-canvas:
+    radial-gradient(ellipse 90% 55% at 0% -8%, oklch(0.78 0.08 236 / 0.42), transparent 58%),
+    radial-gradient(ellipse 70% 50% at 100% 4%, oklch(0.86 0.09 175 / 0.34), transparent 52%),
+    radial-gradient(ellipse 80% 40% at 50% 110%, oklch(0.92 0.05 85 / 0.45), transparent 58%),
+    linear-gradient(180deg, oklch(0.97 0.02 232), oklch(0.955 0.028 200));
+
+  --glow-mist:
+    radial-gradient(ellipse at 8% 0%, oklch(0.76 0.09 246 / 0.26), transparent 52%);
+  --glow-wash:
+    radial-gradient(ellipse at 92% 8%, oklch(0.84 0.1 175 / 0.3), transparent 54%);
+  --glow-cream:
+    radial-gradient(ellipse at 18% 100%, oklch(0.9 0.07 80 / 0.32), transparent 56%);
+  --glow-muted:
+    radial-gradient(ellipse at 50% 0%, oklch(0.72 0.08 246 / 0.2), transparent 62%);
+
   /* =========================================================
      SHADCN / CHART
      ========================================================= */
@@ -234,9 +255,26 @@
   --foreground: oklch(0.985 0 0);
 
   --surface: oklch(0.19 0.015 250);
-  --surface-muted: oklch(0.22 0.015 250);
+  --surface-muted: oklch(0.22 0.02 236);
   --surface-elevated: oklch(0.25 0.02 250);
   --surface-dark: oklch(0.10 0.01 250);
+  --surface-mist: oklch(0.2 0.03 246);
+  --surface-wash: oklch(0.2 0.028 175);
+  --surface-cream: oklch(0.21 0.02 80);
+
+  --page-canvas:
+    radial-gradient(ellipse 80% 50% at 0% 0%, oklch(0.28 0.05 236 / 0.55), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 10%, oklch(0.26 0.05 175 / 0.4), transparent 50%),
+    linear-gradient(180deg, oklch(0.145 0.015 250), oklch(0.16 0.02 230));
+
+  --glow-mist:
+    radial-gradient(ellipse at 8% 0%, oklch(0.45 0.08 246 / 0.28), transparent 52%);
+  --glow-wash:
+    radial-gradient(ellipse at 92% 8%, oklch(0.4 0.08 175 / 0.26), transparent 54%);
+  --glow-cream:
+    radial-gradient(ellipse at 18% 100%, oklch(0.38 0.05 80 / 0.22), transparent 56%);
+  --glow-muted:
+    radial-gradient(ellipse at 50% 0%, oklch(0.4 0.07 246 / 0.22), transparent 62%);
 
   --primary: oklch(0.88 0.04 165);
   --primary-foreground: oklch(0.16 0.02 250);
@@ -300,18 +338,8 @@
 
   body {
     @apply bg-background text-foreground;
-    background-image:
-      radial-gradient(
-        circle at 10% 0%,
-        oklch(0.88 0.08 232 / 0.34),
-        transparent 32rem
-      ),
-      radial-gradient(
-        circle at 1px 1px,
-        oklch(0.42 0.11 246 / 0.10) 1px,
-        transparent 0
-      );
-    background-size: auto, 28px 28px;
+    background-image: var(--page-canvas);
+    background-attachment: fixed;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -403,11 +431,11 @@
   }
 
   .section-spacing-default {
-    @apply py-16 md:py-[5.5rem];
+    @apply py-16 md:py-22;
   }
 
   .section-spacing-lg {
-    @apply py-[4.5rem] md:py-24 lg:py-28;
+    @apply py-18 md:py-24 lg:py-28;
   }
 
   /* =========================================================
@@ -476,6 +504,37 @@
 
   .glass-card {
     @apply border border-white/10 bg-white/10 backdrop-blur-md;
+  }
+
+  .surface-canvas {
+    background-color: transparent;
+  }
+
+  .surface-muted {
+    background-color: var(--surface-muted);
+    background-image: var(--glow-muted);
+  }
+
+  .surface-mist {
+    background-color: var(--surface-mist);
+    background-image: var(--glow-mist);
+  }
+
+  .surface-wash {
+    background-color: var(--surface-wash);
+    background-image: var(--glow-wash);
+  }
+
+  .surface-cream {
+    background-color: var(--surface-cream);
+    background-image: var(--glow-cream);
+  }
+
+  .page-intro {
+    background-color: var(--surface-cream);
+    background-image:
+      var(--glow-mist),
+      var(--glow-cream);
   }
 
   /* =========================================================
@@ -582,6 +641,10 @@
     scroll-behavior: auto;
   }
 
+  body {
+    background-attachment: scroll;
+  }
+
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation: none !important;
@@ -600,6 +663,12 @@
 /* =========================================================
    SMALL MOBILE ADJUSTMENTS
    ========================================================= */
+
+@media (max-width: 1024px) {
+  body {
+    background-attachment: scroll;
+  }
+}
 
 @media (max-width: 639px) {
   .display {

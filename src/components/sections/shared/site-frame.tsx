@@ -15,7 +15,7 @@ export function SiteFrame({
   mainClassName,
 }: SiteFrameProps) {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-transparent text-foreground">
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>

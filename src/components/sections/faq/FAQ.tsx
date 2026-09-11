@@ -11,7 +11,7 @@ import { faqItems } from "@/content/site";
 
 export function FAQ() {
   return (
-    <Section id="faq" spacing="lg">
+    <Section id="faq" spacing="lg" surface="mist">
       <div className="grid gap-12 lg:grid-cols-[.75fr_1.25fr] lg:gap-20">
         <FadeIn>
           <SectionHeader

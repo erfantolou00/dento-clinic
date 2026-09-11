@@ -33,7 +33,7 @@ export default async function JournalPostPage({ params }: JournalPostPageProps) 
 
   return (
     <SiteFrame mainClassName="pt-28">
-      <article className="pb-20 pt-10 md:pb-28 md:pt-16">
+      <article className="page-intro pb-20 pt-10 md:pb-28 md:pt-16">
         <Container>
           <Link
             href="/journal"
@@ -49,7 +49,7 @@ export default async function JournalPostPage({ params }: JournalPostPageProps) 
             <h1 className="mt-4 h1 text-balance">{post.title}</h1>
             <p className="mt-5 body-lg text-muted-foreground">{post.excerpt}</p>
           </div>
-          <div className="relative mx-auto mt-10 aspect-[16/8] max-w-4xl overflow-hidden rounded-[1.5rem]">
+          <div className="relative mx-auto mt-10 aspect-16/8 max-w-4xl overflow-hidden rounded-[1.5rem]">
             <Image
               src={post.image}
               alt=""

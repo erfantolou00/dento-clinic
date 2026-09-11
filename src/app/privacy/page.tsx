@@ -12,7 +12,7 @@ export const metadata = createMetadata({
 export default function PrivacyPage() {
   return (
     <SiteFrame mainClassName="pt-28">
-      <section className="pb-20 pt-10 md:pb-28 md:pt-16">
+      <section className="page-intro pb-20 pt-10 md:pb-28 md:pt-16">
         <Container>
           <div className="mx-auto max-w-3xl space-y-6">
             <p className="eyebrow text-primary/70">Privacy</p>

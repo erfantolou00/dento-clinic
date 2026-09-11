@@ -7,7 +7,7 @@ import { features, pricingHighlight } from "@/content/site";
 
 export function WhyUs() {
   return (
-    <Section id="why-us" spacing="lg">
+    <Section id="why-us" spacing="lg" surface="cream">
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
         <FadeIn>
           <SectionHeader

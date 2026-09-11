@@ -7,7 +7,7 @@ import { toTelHref } from "@/lib/format";
 
 export function Footer() {
   return (
-    <footer className="border-t bg-background py-12 md:py-16">
+    <footer className="border-t border-border/50 bg-surface-cream py-12 md:py-16">
       <Container>
         <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr] md:items-start">
           <div className="space-y-4">

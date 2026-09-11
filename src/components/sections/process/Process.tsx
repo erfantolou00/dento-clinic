@@ -11,7 +11,7 @@ import { defaultTransition, staggerContainer } from "@/lib/animations";
 
 export function Process() {
   return (
-    <Section id="process" spacing="lg" className="relative overflow-hidden bg-surface-muted">
+    <Section id="process" spacing="lg" surface="wash" className="relative overflow-hidden">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(ellipse_at_50%_0%,oklch(0.70_0.13_246/0.18),transparent_65%)]"

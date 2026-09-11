@@ -93,7 +93,7 @@ export function Hero() {
                   {!shouldReduceMotion && (
                     <span
                       aria-hidden
-                      className="ml-2 inline-block h-[0.82em] w-[3px] translate-y-[0.08em] animate-pulse rounded-full bg-accent"
+                      className="ml-2 inline-block h-[0.82em] w-0.75 translate-y-[0.08em] animate-pulse rounded-full bg-accent"
                     />
                   )}
                 </span>
