@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -20,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { services } from "@/content/site";
+import { appointmentTimes, clinic, formatHoursSummary } from "@/content/clinic";
 import type { AppointmentFormValues } from "@/types";
 
 const appointmentSchema = z.object({
@@ -28,6 +30,7 @@ const appointmentSchema = z.object({
   phone: z.string().trim().min(7, "Please enter a valid phone number."),
   service: z.string().min(1, "Please select a service."),
   date: z.string().min(1, "Please choose a preferred date."),
+  time: z.string().min(1, "Please choose a preferred time."),
   message: z
     .string()
     .max(500, "Please keep your message under 500 characters.")
@@ -35,9 +38,23 @@ const appointmentSchema = z.object({
 });
 
 export function Appointment() {
+  return (
+    <Suspense>
+      <AppointmentInner />
+    </Suspense>
+  );
+}
+
+function AppointmentInner() {
+  const searchParams = useSearchParams();
+  const requestedService = searchParams.get("service") ?? "";
+  const defaultService = services.some((service) => service.id === requestedService)
+    ? requestedService
+    : "";
+
   const [submitted, setSubmitted] = useState(false);
-const [submitError, setSubmitError] = useState<string | null>(null);
-  
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const {
     register,
     control,
@@ -46,36 +63,30 @@ const [submitError, setSubmitError] = useState<string | null>(null);
     reset,
   } = useForm<AppointmentFormValues>({
     resolver: zodResolver(appointmentSchema),
-    defaultValues: { service: "" },
+    defaultValues: { service: defaultService, time: "" },
   });
 
   const onSubmit = async (values: AppointmentFormValues) => {
     setSubmitError(null);
-  
+
     try {
       const response = await fetch("/api/appointments", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
-  
+
       const result = await response.json();
-  
+
       if (!response.ok || !result.success) {
-        throw new Error(
-          result.message ?? "Unable to submit appointment request.",
-        );
+        throw new Error(result.message ?? "Unable to submit appointment request.");
       }
-  
+
       setSubmitted(true);
-      reset();
-    } catch (error) {
-      console.error("Appointment submission failed:", error);
-  
+      reset({ service: "", time: "" });
+    } catch {
       setSubmitError(
-        "We couldn't send your request. Please try again or contact the clinic directly.",
+        "We could not send your request. Please call the clinic or try again in a moment."
       );
     }
   };
@@ -89,40 +100,41 @@ const [submitError, setSubmitError] = useState<string | null>(null);
           <div className="lg:sticky lg:top-28">
             <SectionHeader
               label="Your next step"
-              title="Let’s make room for your smile."
-              description="Tell us a little about what you need. Our patient care team will get back to you within one business day."
+              title="Request a visit. We confirm by the next business day."
+              description="Share a preferred date and time. This is a request, not an instant booking — we will call or email to confirm the chair."
             />
             <div className="mt-8 flex items-center gap-3 text-sm text-muted-foreground">
               <span className="flex size-10 items-center justify-center rounded-full bg-secondary text-foreground">
                 <CalendarDays className="size-4" aria-hidden="true" />
               </span>
-              <span>Mon–Fri, 8:00–18:00 · Sat, 9:00–14:00</span>
+              <span>{formatHoursSummary()}</span>
             </div>
+            <a
+              href={clinic.calendarUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 inline-flex text-sm font-semibold text-primary underline-offset-4 hover:underline"
+            >
+              Or pick a time on our calendar
+            </a>
           </div>
         </FadeIn>
         <FadeIn delay={0.1}>
           <div className="rounded-3xl border border-border/70 bg-card p-6 shadow-sm md:p-10">
             {submitted ? (
-              <div
-                role="status"
-                className="flex min-h-90 flex-col items-center justify-center text-center"
-              >
-                <CheckCircle2
-                  className="size-12 text-primary"
-                  aria-hidden="true"
-                />
+              <div role="status" className="flex min-h-90 flex-col items-center justify-center text-center">
+                <CheckCircle2 className="size-12 text-primary" aria-hidden="true" />
                 <h3 className="mt-5 font-heading text-2xl font-semibold">
-                  We’ll be in touch soon.
+                  We will be in touch shortly.
                 </h3>
                 <p className="mt-3 max-w-sm text-muted-foreground">
-                  Thanks for reaching out. We’ve received your request and will
-                  contact you to confirm a time.
+                  A confirmation is on its way to your email. Our patient-care team will confirm a time within one business day.
                 </p>
                 <button
                   type="button"
                   onClick={() => {
                     setSubmitted(false);
-                    reset();
+                    reset({ service: "", time: "" });
                   }}
                   className="mt-7 text-sm font-medium text-primary underline underline-offset-4"
                 >
@@ -136,11 +148,7 @@ const [submitError, setSubmitError] = useState<string | null>(null);
                 className="grid gap-5 sm:grid-cols-2"
               >
                 <Field id="name" label="Your name" error={errorFor("name")}>
-                  <Input
-                    {...register("name")}
-                    aria-invalid={Boolean(errors.name)}
-                    placeholder="Jane Smith"
-                  />
+                  <Input {...register("name")} aria-invalid={Boolean(errors.name)} placeholder="Jane Smith" />
                 </Field>
                 <Field id="email" label="Email address" error={errorFor("email")}>
                   <Input
@@ -148,6 +156,7 @@ const [submitError, setSubmitError] = useState<string | null>(null);
                     aria-invalid={Boolean(errors.email)}
                     type="email"
                     placeholder="jane@email.com"
+                    autoComplete="email"
                   />
                 </Field>
                 <Field id="phone" label="Phone number" error={errorFor("phone")}>
@@ -155,14 +164,11 @@ const [submitError, setSubmitError] = useState<string | null>(null);
                     {...register("phone")}
                     aria-invalid={Boolean(errors.phone)}
                     type="tel"
-                    placeholder="+1 555 000 0000"
+                    placeholder="(416) 555-0188"
+                    autoComplete="tel"
                   />
                 </Field>
-                <Field
-                  id="service"
-                  label="Preferred service"
-                  error={errorFor("service")}
-                >
+                <Field id="service" label="Preferred service" error={errorFor("service")}>
                   <Controller
                     name="service"
                     control={control}
@@ -174,9 +180,7 @@ const [submitError, setSubmitError] = useState<string | null>(null);
                         <SelectTrigger
                           id={field.name}
                           aria-invalid={Boolean(errors.service)}
-                          aria-describedby={
-                            errors.service ? "service-error" : undefined
-                          }
+                          aria-describedby={errors.service ? "service-error" : undefined}
                           className="h-9 w-full bg-transparent px-2.5 text-base md:text-sm"
                         >
                           <SelectValue placeholder="Select a service" />
@@ -193,10 +197,33 @@ const [submitError, setSubmitError] = useState<string | null>(null);
                   />
                 </Field>
                 <Field id="date" label="Preferred date" error={errorFor("date")}>
-                  <Input
-                    {...register("date")}
-                    aria-invalid={Boolean(errors.date)}
-                    type="date"
+                  <Input {...register("date")} aria-invalid={Boolean(errors.date)} type="date" />
+                </Field>
+                <Field id="time" label="Preferred time" error={errorFor("time")}>
+                  <Controller
+                    name="time"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        value={field.value}
+                        onValueChange={(value) => field.onChange(value ?? "")}
+                      >
+                        <SelectTrigger
+                          id={field.name}
+                          aria-invalid={Boolean(errors.time)}
+                          className="h-9 w-full bg-transparent px-2.5 text-base md:text-sm"
+                        >
+                          <SelectValue placeholder="Select a time" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {appointmentTimes.map((time) => (
+                            <SelectItem key={time} value={time}>
+                              {time}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
                   />
                 </Field>
                 <Field
@@ -208,17 +235,17 @@ const [submitError, setSubmitError] = useState<string | null>(null);
                   <Textarea
                     {...register("message")}
                     aria-invalid={Boolean(errors.message)}
-                    placeholder="A little context helps us prepare..."
+                    placeholder="Insurance provider, CDCP, anxiety, or a current toothache..."
                   />
                 </Field>
                 {submitError && (
-  <p
-    role="alert"
-    className="rounded-xl border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive sm:col-span-2"
-  >
-    {submitError}
-  </p>
-)}
+                  <p
+                    role="alert"
+                    className="rounded-xl border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive sm:col-span-2"
+                  >
+                    {submitError}
+                  </p>
+                )}
                 <Button
                   type="submit"
                   size="lg"
@@ -229,8 +256,7 @@ const [submitError, setSubmitError] = useState<string | null>(null);
                   <ArrowUpRight className="size-4" aria-hidden="true" />
                 </Button>
                 <p className="text-xs leading-relaxed text-muted-foreground sm:col-span-2">
-                  By submitting, you agree to be contacted about your
-                  appointment request. No obligation.
+                  By submitting, you agree to be contacted about this request. No treatment is booked until we confirm together.
                 </p>
               </form>
             )}
@@ -266,11 +292,7 @@ function Field({
         "aria-describedby": error ? errorId : undefined,
       })}
       {error && (
-        <span
-          id={errorId}
-          role="alert"
-          className="block text-xs font-normal text-destructive"
-        >
+        <span id={errorId} role="alert" className="block text-xs font-normal text-destructive">
           {error}
         </span>
       )}

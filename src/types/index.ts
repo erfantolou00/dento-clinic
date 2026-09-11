@@ -17,6 +17,7 @@ export type Service = {
   benefits?: string[];
   treatmentSteps?: string[];
   idealFor?: string[];
+  faqs?: FAQItem[];
 };
 
 export type ProcessStep = {
@@ -66,5 +67,6 @@ export type AppointmentFormValues = {
   phone: string;
   service: string;
   date: string;
+  time: string;
   message?: string;
 };

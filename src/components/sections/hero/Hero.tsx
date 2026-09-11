@@ -126,6 +126,7 @@ export function Hero() {
               name={siteConfig.teamLead.name}
               role={siteConfig.teamLead.role}
               href={siteConfig.teamLead.href}
+              imageSrc={siteConfig.teamLead.image}
               className="w-full max-w-sm lg:mb-2 glass-card"
             />
           </motion.div>

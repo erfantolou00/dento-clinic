@@ -288,6 +288,16 @@
     @apply font-sans;
   }
 
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-new(root) {
+    animation: dento-theme-clip 0.55s var(--ease-emphasized);
+  }
+
   body {
     @apply bg-background text-foreground;
     background-image:
@@ -572,6 +582,11 @@
     scroll-behavior: auto;
   }
 
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+
   *,
   *::before,
   *::after {
@@ -589,5 +604,14 @@
 @media (max-width: 639px) {
   .display {
     letter-spacing: -0.045em;
+  }
+}
+
+@keyframes dento-theme-clip {
+  from {
+    clip-path: circle(0px at var(--theme-change-x, 50%) var(--theme-change-y, 50%));
+  }
+  to {
+    clip-path: circle(150vmax at var(--theme-change-x, 50%) var(--theme-change-y, 50%));
   }
 }

@@ -1,18 +1,18 @@
 import { SiteFrame } from "@/components/sections/shared";
-import { Team } from "@/components/sections/team/Team";
+import { EmergencyCare } from "@/components/sections/clinic/EmergencyCare";
 import { Appointment } from "@/components/sections/appointment/Appointment";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
-  title: "Team",
-  description: "Meet the Dento clinicians and dental care specialists in Toronto.",
-  path: "/team",
+  title: "Emergency",
+  description: "Same-day and after-hours dental emergency guidance for Dento patients in Toronto.",
+  path: "/emergency",
 });
 
-export default function TeamPage() {
+export default function EmergencyPage() {
   return (
     <SiteFrame mainClassName="pt-20">
-      <Team />
+      <EmergencyCare />
       <Appointment />
     </SiteFrame>
   );

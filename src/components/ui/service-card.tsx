@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Clock3 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { formatCad } from "@/lib/format";
 import type { Service } from "@/types";
 
 type ServiceCardProps = { 
@@ -64,8 +65,8 @@ export function ServiceCard({
           <p className="mt-3 body-sm text-muted-foreground">{service.description}</p>
         </div>
         <div className="mt-7 flex items-end justify-between border-t border-border/70 pt-4">
-          <span className="h2">${service.price.toFixed(2)}</span>
-          <span className="caption text-muted-foreground">starting price</span>
+          <span className="h2">{formatCad(service.price)}</span>
+          <span className="caption text-muted-foreground">starting fee</span>
         </div>
       </div>
     </article>

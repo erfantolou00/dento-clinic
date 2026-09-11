@@ -4,29 +4,29 @@ export const testimonials: Testimonial[] = [
   {
     id: "1",
     quote:
-      "From my first visit, the friendly team made every treatment comfortable, professional, and completely stress-free.",
+      "The first visit felt unhurried. They explained the CAD estimate, submitted my Sun Life claim, and I knew exactly what I would pay.",
     author: "Devon Lane",
-    role: "Binford Ltd. Owner",
+    role: "Patient from Liberty Village",
   },
   {
     id: "2",
     quote:
-      "The clinic exceeded my expectations. Modern equipment, gentle care, and a team that truly listens to your concerns.",
+      "I had avoided the dentist for years. The team let me pause, explained each step, and the filling was far gentler than I expected.",
     author: "Sarah Mitchell",
-    role: "Marketing Director",
+    role: "Patient from Parkdale",
   },
   {
     id: "3",
     quote:
-      "I've never felt more comfortable at a dentist. The whole experience from booking to follow-up was seamless.",
+      "Booked a Saturday cleaning before a trip. On time, clear, and they flagged a small issue instead of upselling a long plan.",
     author: "Michael Chen",
-    role: "Software Engineer",
+    role: "Patient from CityPlace",
   },
   {
     id: "4",
     quote:
-      "Outstanding results on my teeth whitening. Professional, affordable, and the smile I've always wanted.",
+      "Whitening looked natural, not theatrical. They were honest that insurance would not cover it, which I appreciated.",
     author: "Emma Rodriguez",
-    role: "Creative Designer",
+    role: "Patient from Queen West",
   },
 ];

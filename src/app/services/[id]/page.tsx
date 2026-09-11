@@ -2,9 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock3 } from "lucide-react";
-import { Header, Footer } from "@/components/sections/shared";
+import { SiteFrame } from "@/components/sections/shared";
 import { Container } from "@/components/ui/container";
 import { services } from "@/content/site";
+import { formatCadFrom } from "@/lib/format";
+import { createMetadata } from "@/lib/seo";
 
 type ServicePageProps = {
   params: Promise<{ id: string }>;
@@ -24,10 +26,11 @@ export async function generateMetadata({ params }: ServicePageProps) {
     };
   }
 
-  return {
+  return createMetadata({
     title: service.title,
     description: service.summary ?? service.description,
-  };
+    path: `/services/${id}`,
+  });
 }
 
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
@@ -37,9 +40,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   if (!service) notFound();
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Header />
-      <main className="pt-28">
+    <SiteFrame mainClassName="pt-28">
         <section className="relative overflow-hidden pb-16 pt-8 md:pb-24 md:pt-14">
           <div
             aria-hidden
@@ -70,12 +71,12 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     </span>
                   )}
                   <span className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
-                    From ${service.price.toFixed(2)}
+                    {formatCadFrom(service.price)}
                   </span>
                 </div>
 
                 <Link
-                  href="/#appointment"
+                  href={`/appointment?service=${service.id}`}
                   className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
                 >
                   Book this treatment
@@ -107,11 +108,22 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               <DetailPanel title="Treatment flow" items={service.treatmentSteps ?? []} />
               <DetailPanel title="Ideal for" items={service.idealFor ?? []} />
             </div>
+            {service.faqs && service.faqs.length > 0 && (
+              <div className="mt-10 grid gap-4 md:grid-cols-2">
+                {service.faqs.map((item) => (
+                  <article
+                    key={item.question}
+                    className="rounded-[1.25rem] border border-border/70 bg-card p-6"
+                  >
+                    <h2 className="font-heading text-lg font-semibold">{item.question}</h2>
+                    <p className="mt-2 body-sm text-muted-foreground">{item.answer}</p>
+                  </article>
+                ))}
+              </div>
+            )}
           </Container>
         </section>
-      </main>
-      <Footer />
-    </div>
+    </SiteFrame>
   );
 }
 

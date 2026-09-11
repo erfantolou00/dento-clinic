@@ -36,7 +36,7 @@ export function WhyUs() {
               {pricingHighlight.description}
             </p>
           </div>
-          <PillButton href="#appointment">Contact Us</PillButton>
+          <PillButton href="/appointment">Book a visit</PillButton>
         </div>
       </FadeIn>
     </Section>

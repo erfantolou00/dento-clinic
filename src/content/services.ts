@@ -3,153 +3,200 @@ import type { Service } from "@/types";
 export const services: Service[] = [
   {
     id: "fillings",
-    title: "Dental Fillings",
+    title: "Dental fillings",
     description:
-      "Natural-looking dental fillings that restore function and confidence.",
-    price: 155,
+      "Tooth-coloured restorations that repair cavities and chips without a metallic look.",
+    price: 225,
     eyebrow: "Restorative",
     duration: "45–60 min",
     featured: true,
     image: "/images/servises/DentalFillings.avif",
     summary:
-      "A precise, tooth-colored restoration for small cavities, chips, and worn surfaces with a finish that blends naturally into your smile.",
+      "A precise composite restoration for small cavities, chips, and worn edges, shaded to neighbouring enamel.",
     benefits: [
       "Natural shade matching",
-      "Comfort-first local anesthesia",
+      "Comfort-first local anaesthetic",
       "Durable composite materials",
-      "Same-day restoration",
+      "Often completed the same day",
     ],
     treatmentSteps: [
-      "Digital exam and shade selection",
+      "Exam and shade selection",
       "Gentle cleaning of the affected area",
       "Layered composite placement",
       "Bite check and polish",
     ],
     idealFor: ["Small cavities", "Chipped teeth", "Worn enamel"],
+    faqs: [
+      {
+        question: "Will my insurance cover a filling?",
+        answer:
+          "Most Canadian private plans and CDCP cover medically necessary fillings. We pre-determine when we can and quote your portion in CAD first.",
+      },
+      {
+        question: "Does a filling hurt?",
+        answer:
+          "The tooth is numbed first. You should feel pressure, not sharp pain. Tell us if anything feels sharp so we can pause.",
+      },
+    ],
   },
   {
     id: "invisalign",
-    title: "Invisalign / Braces",
+    title: "Invisalign / braces",
     description:
-      "Discreet alignment options planned around your bite, lifestyle, and smile goals.",
-    price: 88,
+      "Discreet alignment planned around your bite, commute, and how you like to be seen at work.",
+    price: 4500,
     eyebrow: "Orthodontics",
-    duration: "45 min",
+    duration: "45 min consult",
     image: "/images/servises/Invisalign.avif",
     summary:
-      "A modern orthodontic path using clear aligners or braces to improve spacing, crowding, and bite alignment with predictable planning.",
+      "A digital orthodontic path using clear aligners or braces to improve crowding, spacing, and bite with a preview before you commit.",
     benefits: [
-      "Digital smile planning",
+      "3D smile planning",
       "Clear aligner options",
-      "Progress tracking visits",
-      "Comfortable treatment guidance",
+      "Progress visits that fit a downtown schedule",
+      "Retention guidance after treatment",
     ],
     treatmentSteps: [
-      "3D scan and bite assessment",
+      "Scan and bite assessment",
       "Treatment simulation review",
       "Aligner or braces fitting",
-      "Scheduled refinements and retention",
+      "Refinements and retainers",
     ],
     idealFor: ["Crowded teeth", "Gaps", "Bite correction"],
+    faqs: [
+      {
+        question: "Is the listed fee the full Invisalign cost?",
+        answer:
+          "The published number is a starting point in CAD. Final fees depend on case complexity. The consult maps the range before you start.",
+      },
+    ],
   },
   {
     id: "whitening",
-    title: "Teeth Whitening",
+    title: "Teeth whitening",
     description:
-      "Restore your smile's natural brilliance with advanced whitening treatments.",
-    price: 48,
+      "Clinician-supervised whitening that lifts stains while protecting enamel and gum comfort.",
+    price: 399,
     eyebrow: "Cosmetic",
     duration: "60 min",
     image: "/images/servises/TeethWhitening.avif",
     summary:
-      "A controlled cosmetic whitening visit designed to brighten stains while protecting enamel and gum comfort.",
+      "A controlled cosmetic visit designed to brighten coffee, tea, and wine stains without overselling a Hollywood shade.",
     benefits: [
-      "Clinician-supervised whitening",
+      "Supervised in-office protocol",
       "Even, natural-looking brightness",
-      "Sensitivity-aware protocol",
-      "Fast visible results",
+      "Sensitivity-aware gel timing",
+      "Visible change in a single visit",
     ],
     treatmentSteps: [
       "Shade and sensitivity check",
       "Gum protection setup",
       "Whitening gel application",
-      "Final shade review and aftercare",
+      "Aftercare and shade review",
     ],
-    idealFor: ["Coffee stains", "Event-ready smiles", "Dull enamel"],
+    idealFor: ["Coffee stains", "Events", "Dull enamel"],
+    faqs: [
+      {
+        question: "Is whitening covered by insurance?",
+        answer:
+          "Cosmetic whitening is rarely covered by Canadian dental plans. We will say so up front and keep the fee in CAD, with no add-on surprises.",
+      },
+    ],
   },
   {
     id: "cleaning",
-    title: "Teeth cleaning",
+    title: "Exam and cleaning",
     description:
-      "A gentle professional clean that refreshes your smile and supports long-term gum health.",
-    price: 55,
+      "A gentle hygiene visit that refreshes your smile and catches small issues before they become emergencies.",
+    price: 165,
     eyebrow: "Preventive",
-    duration: "30 min",
+    duration: "50 min",
     image: "/images/servises/Teethcleaning.avif",
     summary:
-      "A preventive visit focused on removing plaque and buildup, polishing the teeth, and catching early signs before they become bigger issues.",
+      "A preventive appointment focused on gum health, stain lift, and a dentist exam so nothing quietly gets worse between visits.",
     benefits: [
       "Plaque and tartar removal",
       "Gum health screening",
-      "Fresh polish and stain lift",
+      "Polish and stain lift",
       "Personal home-care guidance",
     ],
     treatmentSteps: [
-      "Gum and enamel check",
-      "Ultrasonic and hand scaling",
-      "Polish and floss",
-      "Prevention recommendations",
+      "Medical history and gum check",
+      "Scaling and polish",
+      "Dentist exam",
+      "Recall recommendation",
     ],
-    idealFor: ["Routine care", "Gum maintenance", "Fresh breath"],
+    idealFor: ["Routine care", "New patients", "Gum maintenance"],
+    faqs: [
+      {
+        question: "How often should I book a cleaning?",
+        answer:
+          "Most healthy adults in our Toronto practice do well every six months. If gums are inflamed, we may suggest a tighter recall.",
+      },
+    ],
   },
   {
     id: "root-canal",
-    title: "Root Canal Therapy",
+    title: "Root canal therapy",
     description:
-      "Advanced root canal therapy to relieve pain and preserve your natural tooth.",
-    price: 90,
+      "Careful treatment to relieve infection and keep a natural tooth whenever it is the wiser long-term choice.",
+    price: 895,
     eyebrow: "Restorative",
     duration: "90 min",
     image: "/images/servises/RootCanalTherapy.avif",
     summary:
-      "A careful tooth-saving treatment that removes infection, relieves pain, and preserves your natural tooth whenever possible.",
+      "A tooth-saving visit that removes infection, settles pain, and plans a protective restoration afterwards.",
     benefits: [
-      "Pain relief focused care",
-      "Tooth preservation",
+      "Pain-relief focused care",
+      "Preserve the natural tooth",
       "Digital imaging support",
-      "Protective restoration planning",
+      "Crown planning when needed",
     ],
     treatmentSteps: [
       "Diagnosis and comfort setup",
       "Canal cleaning and shaping",
       "Sealing the treated tooth",
-      "Final restoration recommendation",
+      "Restoration recommendation",
     ],
-    idealFor: ["Tooth pain", "Deep infection", "Saving natural teeth"],
+    idealFor: ["Tooth pain", "Deep infection", "Saving a tooth"],
+    faqs: [
+      {
+        question: "Do I need a crown after a root canal?",
+        answer:
+          "Often yes for back teeth, because the tooth is more brittle. We explain that fee in CAD before we start so the full path is visible.",
+      },
+    ],
   },
   {
     id: "implants",
-    title: "Dental Implants",
+    title: "Dental implants",
     description:
-      "Stable, natural-feeling tooth replacement planned with surgical precision.",
-    price: 95,
+      "Stable tooth replacement planned with 3D imaging, surgical precision, and a natural final crown.",
+    price: 2800,
     eyebrow: "Implantology",
-    duration: "60 min",
+    duration: "60 min consult",
     image: "/images/servises/DentalImplants.avif",
     summary:
-      "A long-term replacement option for missing teeth, planned around bone health, bite balance, and a natural final appearance.",
+      "A long-term replacement for missing teeth, planned around bone, bite, and how the crown will look in conversation.",
     benefits: [
       "3D-guided planning",
-      "Stable tooth replacement",
+      "Stable chewing",
       "Natural crown aesthetics",
-      "Long-term function support",
+      "Long-term function",
     ],
     treatmentSteps: [
       "Consultation and 3D imaging",
-      "Implant planning and placement",
-      "Healing and integration checks",
-      "Custom crown attachment",
+      "Placement and healing checks",
+      "Custom crown",
+      "Maintenance visits",
     ],
     idealFor: ["Missing teeth", "Loose dentures", "Long-term replacement"],
+    faqs: [
+      {
+        question: "Is $2,800 CAD the full implant fee?",
+        answer:
+          "It is a starting surgical fee. The crown, imaging, and any grafting are quoted separately after we see your scan. Nothing proceeds without a written estimate.",
+      },
+    ],
   },
 ];

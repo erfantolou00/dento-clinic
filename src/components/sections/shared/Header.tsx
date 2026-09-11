@@ -2,13 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
 import { PillButton } from "@/components/ui/pill-button";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { navLinks } from "@/content/site";
+import { clinic } from "@/content/clinic";
 import { useScroll } from "@/hooks/use-scroll";
 import { cn } from "@/lib/utils";
+import { toTelHref } from "@/lib/format";
 
 type HeaderProps = {
   variant?: "light" | "dark";
@@ -35,7 +38,10 @@ export function Header({ variant = "dark" }: HeaderProps) {
         <div className="flex h-16 items-center justify-between md:h-20">
           <Logo variant={onHero ? "light" : "dark"} />
 
-          <nav aria-label="Primary navigation" className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
+          <nav
+            aria-label="Primary navigation"
+            className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 lg:flex"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -52,23 +58,37 @@ export function Header({ variant = "dark" }: HeaderProps) {
             ))}
           </nav>
 
-          <div className="hidden md:block">
-            <PillButton href="/#appointment">Book a session</PillButton>
+          <div className="hidden items-center gap-2 lg:flex">
+            <a
+              href={toTelHref(clinic.phone.e164)}
+              className={cn(
+                "hidden items-center gap-2 rounded-full px-3 py-2 text-sm font-medium xl:inline-flex",
+                onHero ? "text-white/80 hover:text-white" : "text-foreground/70 hover:text-foreground"
+              )}
+            >
+              <Phone className="size-4" aria-hidden />
+              {clinic.phone.display}
+            </a>
+            <ThemeToggle inverted={onHero} />
+            <PillButton href="/appointment">Book a visit</PillButton>
           </div>
 
-          <button
-            type="button"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-navigation"
-            className={cn(
-              "inline-flex size-10 items-center justify-center rounded-lg md:hidden",
-              onHero ? "text-white" : "text-foreground"
-            )}
-            onClick={() => setMobileOpen((open) => !open)}
-          >
-            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle inverted={onHero} />
+            <button
+              type="button"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
+              className={cn(
+                "inline-flex size-10 items-center justify-center rounded-lg",
+                onHero ? "text-white" : "text-foreground"
+              )}
+              onClick={() => setMobileOpen((open) => !open)}
+            >
+              {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
+          </div>
         </div>
       </Container>
 
@@ -76,8 +96,8 @@ export function Header({ variant = "dark" }: HeaderProps) {
         id="mobile-navigation"
         aria-label="Mobile navigation"
         className={cn(
-          "overflow-hidden border-t border-border/60 bg-background transition-all duration-300 md:hidden",
-          mobileOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+          "overflow-hidden border-t border-border/60 bg-background transition-all duration-300 lg:hidden",
+          mobileOpen ? "max-h-[80vh] overflow-y-auto opacity-100" : "max-h-0 opacity-0"
         )}
       >
         <Container className="flex flex-col gap-4 py-5">
@@ -91,8 +111,14 @@ export function Header({ variant = "dark" }: HeaderProps) {
               {link.label}
             </Link>
           ))}
-          <PillButton href="/#appointment" className="w-fit">
-            Book a session
+          <a
+            href={toTelHref(clinic.phone.e164)}
+            className="text-sm font-medium text-foreground/80"
+          >
+            Call {clinic.phone.display}
+          </a>
+          <PillButton href="/appointment" className="w-fit">
+            Book a visit
           </PillButton>
         </Container>
       </div>

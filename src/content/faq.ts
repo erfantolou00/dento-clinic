@@ -2,28 +2,38 @@ import type { FAQItem } from "@/types";
 
 export const faqItems: FAQItem[] = [
   {
-    question: "What treatment do you offer?",
+    question: "What treatments do you offer?",
     answer:
-      "We offer a comprehensive range of dental services including cleanings, fillings, teeth whitening, Invisalign, root canal therapy, and dental implants.",
+      "Family dentistry, exams and cleanings, fillings, whitening, Invisalign, root canal therapy, and implants — all at our King West clinic in Toronto.",
   },
   {
-    question: "How often should I visit the dentist?",
+    question: "Do you take insurance or CDCP?",
     answer:
-      "We recommend visiting every six months for routine checkups and cleanings. Patients with specific conditions may need more frequent visits.",
+      "Yes. We direct-bill most major Canadian insurers and welcome eligible CDCP patients. Bring your card or member details and we confirm your portion in CAD before treatment.",
   },
   {
-    question: "What should I expect during my first appointment?",
+    question: "Does OHIP cover my dental visit?",
     answer:
-      "Your first visit includes a thorough examination, digital X-rays if needed, a discussion of your dental history, and a personalized treatment plan.",
+      "OHIP does not cover routine dental care. We will always explain fees before we start and help you use private insurance or CDCP where you qualify.",
+  },
+  {
+    question: "How often should I visit?",
+    answer:
+      "Most adults do well every six months. If gums are inflamed or you are in active treatment, we may suggest a shorter interval.",
+  },
+  {
+    question: "What should I expect at my first appointment?",
+    answer:
+      "About an hour: conversation, exam, imaging only if needed, and a written plan. Please arrive ten minutes early with ID and insurance details.",
   },
   {
     question: "Are you accepting new patients?",
     answer:
-      "Yes, we are currently accepting new patients. You can book your first appointment online or by calling our clinic directly.",
+      "Yes. Book online, call (416) 555-0188, or use the calendar link. Same-week exams are often available.",
   },
   {
-    question: "Do you offer emergency dental appointments?",
+    question: "Do you offer emergency appointments?",
     answer:
-      "Yes, we reserve time slots for dental emergencies. Contact us immediately if you're experiencing severe pain, swelling, or a dental injury.",
+      "We keep chairs for dental emergencies during clinic hours and an after-hours line for severe pain, swelling, or trauma. Call (416) 555-0199 if the clinic is closed.",
   },
 ];

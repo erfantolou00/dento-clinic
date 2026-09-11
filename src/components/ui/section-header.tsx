@@ -45,7 +45,7 @@ export function SectionHeader({
           <span
             className={cn(
               "relative inline-flex h-2.5 w-2.5 rounded-full",
-              dark ? "bg-accent" : "primary"
+              dark ? "bg-accent" : "bg-primary"
             )}
           />
         </span>

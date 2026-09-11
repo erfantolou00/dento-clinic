@@ -90,7 +90,7 @@ export function Process() {
 
       <FadeIn delay={0.25} className="mt-14 flex justify-center md:mt-16 lg:hidden">
         <motion.a
-          href="#appointment"
+          href="/appointment"
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           transition={defaultTransition}

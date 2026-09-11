@@ -1,52 +1,81 @@
 "use client";
 
-import { Sun, Moon } from "lucide-react";
-import { useRef, useState } from "react";
+import { Moon, Sun } from "lucide-react";
+import { useCallback, useRef, useSyncExternalStore } from "react";
+import { cn } from "@/lib/utils";
 
-function ThemeToggle() {
-  const [isDark, setIsDark] = useState(() =>
-    typeof document === "undefined"
-      ? false
-      : document.documentElement.classList.contains("dark")
-  );
+type ThemeToggleProps = {
+  className?: string;
+  inverted?: boolean;
+};
+
+function subscribe(callback: () => void) {
+  const observer = new MutationObserver(callback);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  window.addEventListener("storage", callback);
+  return () => {
+    observer.disconnect();
+    window.removeEventListener("storage", callback);
+  };
+}
+
+function getSnapshot() {
+  return document.documentElement.classList.contains("dark");
+}
+
+function getServerSnapshot() {
+  return false;
+}
+
+export function ThemeToggle({ className, inverted = false }: ThemeToggleProps) {
+  const isDark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const themeChange = () => {
-    const newIsDark = !document.documentElement.classList.contains("dark");
-    const applyTheme = () => {
-      document.documentElement.classList.toggle("dark", newIsDark);
-      setIsDark(newIsDark);
-    };
+  const applyTheme = useCallback((nextIsDark: boolean) => {
+    document.documentElement.classList.toggle("dark", nextIsDark);
+    localStorage.setItem("dento-theme", nextIsDark ? "dark" : "light");
+  }, []);
 
-    if (!document.startViewTransition) {
-      applyTheme();
+  const onToggle = () => {
+    const nextIsDark = !document.documentElement.classList.contains("dark");
+    const button = buttonRef.current;
+
+    if (!document.startViewTransition || !button) {
+      applyTheme(nextIsDark);
       return;
     }
 
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const x = rect.left + rect.width / 2;
-      const y = rect.top + rect.height / 2;
+    const rect = button.getBoundingClientRect();
+    document.documentElement.style.setProperty(
+      "--theme-change-x",
+      `${rect.left + rect.width / 2}px`
+    );
+    document.documentElement.style.setProperty(
+      "--theme-change-y",
+      `${rect.top + rect.height / 2}px`
+    );
 
-      document.documentElement.style.setProperty("--theme-change-x", `${x}px`);
-      document.documentElement.style.setProperty("--theme-change-y", `${y}px`);
-
-      document.startViewTransition(() => {
-        applyTheme();
-      });
-    }
+    document.startViewTransition(() => {
+      applyTheme(nextIsDark);
+    });
   };
 
   return (
     <button
       ref={buttonRef}
-      onClick={themeChange}
+      type="button"
+      onClick={onToggle}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      className="flex w-full items-center justify-center rounded-md bg-muted p-2 transition-colors hover:bg-secondary md:w-auto md:bg-transparent"
+      className={cn(
+        "inline-flex size-10 items-center justify-center rounded-full border border-border/70 transition hover:bg-secondary",
+        inverted && "border-white/20 text-white hover:bg-white/10",
+        className
+      )}
     >
-      {isDark ? <Moon size={18} /> : <Sun size={18} />}
+      {isDark ? <Moon className="size-4" /> : <Sun className="size-4" />}
     </button>
   );
 }
-
-export default ThemeToggle;

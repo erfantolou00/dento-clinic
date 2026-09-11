@@ -101,21 +101,26 @@ src/
 
 ---
 
-## 🎨 سفارشی‌سازی
+## Customize for a clinic
 
-### تغییر رنگ‌ها
-رنگ‌های اصلی پروژه در فایل زیر قابل تغییر هستند:
+Most buyers only need the content files and environment variables:
 
-```bash
-src/app/globals.css
-```
+| File | What to change |
+|---|---|
+| `src/content/clinic.ts` | Address, phone, hours, map, insurance, emergency, visit prep, calendar URL |
+| `src/content/site.ts` | Clinic name, navigation, stats |
+| `src/content/services.ts` | Treatments and CAD starting fees |
+| `src/content/team.ts` | Clinicians |
+| `src/content/faq.ts` | Questions patients actually ask |
+| `src/content/blog.ts` | Journal articles |
+| `src/app/globals.css` | Colour tokens |
+| `.env.example` | Copy to `.env.local` for Resend appointment mail |
 
-### اضافه کردن کامپوننت جدید shadcn
+Copy `.env.example` to `.env.local` and set:
 
-```bash
-npx shadcn@latest add button
-npx shadcn@latest add dialog
-```
+- `RESEND_API_KEY`
+- `APPOINTMENT_NOTIFICATION_EMAIL`
+- `APPOINTMENT_FROM_EMAIL`
 
 ---
 
